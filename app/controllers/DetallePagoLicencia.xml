@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DetallePagoLicencia" conflictDetection="overwriteChanges" label="Detalle Pago Licencia" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" custom="false">
+      <text><![CDATA[select
+	"DETALLE_DEV_LICENCIAS"."ID_DETALLE_DEVOLUCION" "IDDetalleDevolucion"
+	,"DETALLE_DEV_LICENCIAS"."ID_LICENCIA" "IDLicencia"
+	,"TheID_LICENCIA"."NO_LICENCIA" "TheidLicencianoLicencia"
+	,"TheID_LICENCIAID_AUTORIZADO"."UBICACION" "TheidLicenciaidAutorizadoubicacion"
+	,"TheID_LICENCIAID_AUTORIZADOID_PROYECTO"."NOMBRE_PROYECTO" "TheidLicenciaidAutorizadoidProyectonombreProyecto"
+	,"TheID_LICENCIAID_EMAIL_AVISO"."CLASIFICACION" "TheidLicenciaidEmailAvisoclasificacion"
+	,"TheID_LICENCIAID_ESTADO"."ESTADO" "TheidLicenciaidEstadoestado"
+	,"TheID_LICENCIAID_PROVEEDOR"."NOMBRE_COMERCIAL" "TheidLicenciaidProveedornombreComercial"
+	,"DETALLE_DEV_LICENCIAS"."VALOR_DEV" "ValorDev"
+	,"DETALLE_DEV_LICENCIAS"."ID_OCUPACION" "IDOcupacion"
+	,"TheID_OCUPACION"."OCUPACION" "TheidOcupacionocupacion"
+	,"TheID_OCUPACION"."AÑO" "TheidOcupacionAo"
+	,"TheID_OCUPACION"."OBSERVACION" "TheidOcupacionObservacion"
+	,"DETALLE_DEV_LICENCIAS"."NO_BOLETA" "NoBoleta"
+	,"DETALLE_DEV_LICENCIAS"."DETALLE_DEVOLUCION" "DetalleDevolucion"
+	,"DETALLE_DEV_LICENCIAS"."BOLETA" "Boleta"
+	,"DETALLE_DEV_LICENCIAS"."CONTENT_TYPE" "ContentType"
+	,"DETALLE_DEV_LICENCIAS"."USUARIO_CREA" "UsuarioCrea"
+	,"DETALLE_DEV_LICENCIAS"."FECHA_CREA" "FechaCrea"
+	,"DETALLE_DEV_LICENCIAS"."USUARIO_ACTUALIZA" "UsuarioActualiza"
+	,"DETALLE_DEV_LICENCIAS"."FECHA_ACTUALIZA" "FechaActualiza"
+from "dbo"."DETALLE_DEV_LICENCIAS" "DETALLE_DEV_LICENCIAS"
+	left join "dbo"."LICENCIAS_CONSTRUCCION" "TheID_LICENCIA" on "DETALLE_DEV_LICENCIAS"."ID_LICENCIA" = "TheID_LICENCIA"."ID_LICENCIA"
+	left join "dbo"."AUTORIZADO" "TheID_LICENCIAID_AUTORIZADO" on "TheID_LICENCIA"."ID_AUTORIZADO" = "TheID_LICENCIAID_AUTORIZADO"."ID_AUTORIZADO"
+	left join "dbo"."PROYECTO" "TheID_LICENCIAID_AUTORIZADOID_PROYECTO" on "TheID_LICENCIAID_AUTORIZADO"."ID_PROYECTO" = "TheID_LICENCIAID_AUTORIZADOID_PROYECTO"."ID_PROYECTO"
+	left join "dbo"."EMAIL_AVISO" "TheID_LICENCIAID_EMAIL_AVISO" on "TheID_LICENCIA"."ID_EMAIL_AVISO" = "TheID_LICENCIAID_EMAIL_AVISO"."ID_EMAIL_AVISO"
+	left join "dbo"."ESTADOS" "TheID_LICENCIAID_ESTADO" on "TheID_LICENCIA"."ID_ESTADO" = "TheID_LICENCIAID_ESTADO"."ID_ESTADO"
+	left join "dbo"."PROVEEDORES" "TheID_LICENCIAID_PROVEEDOR" on "TheID_LICENCIA"."ID_PROVEEDOR" = "TheID_LICENCIAID_PROVEEDOR"."ID_PROVEEDOR"
+	left join "dbo"."PERMISO_OCUPACION" "TheID_OCUPACION" on "DETALLE_DEV_LICENCIAS"."ID_OCUPACION" = "TheID_OCUPACION"."ID_OCUPACION"]]></text>
+    </command>
+    <command id="ID_LICENCIA_PAGOIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="IDLicenciaPago" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="IDLicenciaPago" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Licencia Pago" readOnly="true" />
+    <field name="IDProducto" type="Int32" allowNulls="false" label="Producto" showInSummary="true">
+      <items style="RadioButtonList" dataController="Producto" dataView="grid1" dataTextField="Descripcion" dataValueField="IDProducto" />
+    </field>
+    <field name="SerieFactura" type="String" label="Serie Factura" length="20" showInSummary="true" />
+    <field name="NumeroFactura" type="String" label="Numero Factura" length="20" showInSummary="true" />
+    <field name="MontoMl" type="Decimal" allowNulls="false" label="Monto Ml" showInSummary="true" />
+    <field name="Estado" type="String" allowNulls="false" label="Estado" length="1" showInSummary="true" />
+    <field name="UsuarioCrea" type="String" label="Usuario Crea" length="20" />
+    <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
+    <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" />
+    <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Detalle Pago Licencia">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="IDProducto" columns="15" />
+        <dataField fieldName="SerieFactura" columns="20" />
+        <dataField fieldName="NumeroFactura" columns="20" />
+        <dataField fieldName="MontoMl" columns="15" />
+        <dataField fieldName="Estado" columns="1" textMode="Static" />
+        <dataField fieldName="UsuarioCrea" columns="20" textMode="Static" />
+        <dataField fieldName="FechaCrea" columns="20" textMode="Static" />
+        <dataField fieldName="UsuarioActualiza" columns="20" textMode="Static" />
+        <dataField fieldName="FechaActualiza" columns="20" textMode="Static" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Detalle Pago Licencia">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="IDProducto" columns="15" />
+            <dataField fieldName="SerieFactura" columns="20" />
+            <dataField fieldName="NumeroFactura" columns="20" />
+            <dataField fieldName="MontoMl" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="FechaActualiza" columns="20" textMode="Static" />
+            <dataField fieldName="UsuarioActualiza" columns="20" textMode="Static" />
+            <dataField fieldName="FechaCrea" columns="20" textMode="Static" />
+            <dataField fieldName="UsuarioCrea" columns="20" textMode="Static" />
+            <dataField fieldName="Estado" columns="1" textMode="Static" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Detalle Pago Licencia">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c3" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="IDProducto" columns="15" />
+            <dataField fieldName="SerieFactura" columns="20" />
+            <dataField fieldName="NumeroFactura" columns="20" />
+            <dataField fieldName="MontoMl" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="FechaActualiza" columns="20" textMode="Static" />
+            <dataField fieldName="UsuarioActualiza" columns="20" textMode="Static" />
+            <dataField fieldName="FechaCrea" columns="20" textMode="Static" />
+            <dataField fieldName="UsuarioCrea" columns="20" textMode="Static" />
+            <dataField fieldName="Estado" columns="1" textMode="Static" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[set @UsuarioCrea=@BusinessRules_UserName
+set @FechaCrea=GETDATE()
+set @Estado='A'
+set @FechaActualiza=GETDATE()
+set @UsuarioActualiza=@BusinessRules_UserName]]></rule>
+  </businessRules>
+</dataController>

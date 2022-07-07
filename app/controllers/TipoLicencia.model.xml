@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TIPO_LICENCIA" alias="TIPO_LICENCIA" created="2022-02-22T10:33:15" modified="2022-07-06T16:02:03" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="DESCRIPCION" fieldName="Descripcion" label="Descripcion" />
+    <column name="COMENTARIOS" fieldName="Comentarios" label="Comentarios" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+    <column name="ID_TIPO_LICENCIA" fieldName="IDTipoLicencia" label="ID Tipo Licencia" />
+  </columns>
+</dataModel>

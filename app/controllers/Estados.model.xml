@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="ESTADOS" alias="ESTADOS" created="2022-06-23T10:45:37" modified="2022-07-01T07:25:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ID_ESTADO" fieldName="IDEstado" label="Id Estado" />
+    <column name="ESTADO" fieldName="Estado" label="Estado" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+    <column name="CLASIFICACION" fieldName="Clasificacion" label="Clasificacion" />
+  </columns>
+</dataModel>

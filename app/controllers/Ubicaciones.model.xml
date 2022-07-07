@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Ubicaciones" alias="Ubicaciones" created="2022-06-27T11:35:45" modified="2022-06-27T12:51:06" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TheID_PROYECTO" parentTableSchema="dbo" parentTableName="PROYECTO" x="349" y="20">
+      <foreignKeyColumn columnName="ID_PROYECTO" parentColumnName="ID_PROYECTO" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ID_UBICACION" fieldName="IDUbicacion" label="Id Ubicacion" />
+    <column name="ID_PROYECTO" fieldName="IDProyecto" label="Id Proyecto" aliasColumnName="NOMBRE_PROYECTO" aliasForeignKey="TheID_PROYECTO" />
+    <column name="NOMBRE_PROYECTO" fieldName="TheidProyectonombreProyecto" label="IDPROYECTO Nombre Proyecto" foreignKey="TheID_PROYECTO" />
+    <column name="DESCRIPCION" fieldName="Descripcion" label="Descripcion" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+  </columns>
+</dataModel>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DASHBOARD_LICENCIA" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Producto" type="DataView" label="Producto">
+      <dataView controller="Producto" view="grid1" />
+    </field>
+    <field name="DetallePagoLicencia" type="DataView" label="Detalle Pago Licencia">
+      <dataView controller="DetallePagoLicencia" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="FORM1" type="Form" label="FORMULARIOS">
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Producto" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="DetallePagoLicencia" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

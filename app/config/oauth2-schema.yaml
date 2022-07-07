@@ -1,0 +1,481 @@
+# -----------------------------
+# POST oauth2/v2/auth/pkce
+# -----------------------------
+post/auth/pkce:
+  _input:
+    client_id:
+      type: String
+      required: true
+      hint: The client ID known to $Application.
+    redirect_uri:
+      type: String        
+      required: true
+      hint: $Application will redirect to this URL after the successful authentication and approval by user.
+    state:
+      type: String
+      hint: Data duplicated in the 'return_url' after the successful authentication. 
+    scope: 
+      type: String
+      hint: List of scopes associated with the access token.
+    code_challenge:
+      type: String
+      hint: Proof Key for Code Exchange (PKCE) in the base64 url-encoded or plain format. It will be associated with the authorization code. The value is automatically generated with 'S256' method if not specified.
+    code_challenge_method:
+      type: String
+      values: 
+      - S256
+      - plain
+      hint: Indicates the method used to construct the 'code_challenge'.
+  _output:
+    state:
+      type: String
+      hint: Data copied from the 'authorize' link to the 'return_uri' after successful authentication. Compare the value to the original before an attempt to get the token.
+    token:
+      hint: $Application will redirect to the 'redirect_uri' specified in the 'authorize' link after the successful authorization. Copy the 'code' parameter received in the 'return_uri' to the 'code' key. Post the 'token' object to the 'token' link to obtain the access token.
+      properties:
+        grant_type:
+          type: String
+          required: true
+          values: 
+          - authorization_code
+          hint: Specifies the type of the token grant requested.
+        code:
+          type: String
+          required: true
+          hint: The value returned in the 'redirect_uri' after the successful authentication and approval by user.
+        redirect_uri:
+          type: String        
+          required: true
+          hint: $Application will redirect to this URL after the successful authentication and approval by user.
+        client_id:
+          type: String        
+          required: true
+          hint: The client ID known to $Application.
+        code_verifier:
+          type: String        
+          required: true
+          hint: The original Proof Key for Code Exchange (PKCE) that was encoded in the 'authorize' link.
+# -----------------------------
+# POST oauth2/v2/auth/spa
+# -----------------------------
+post/auth/spa:
+  _input:
+    client_id:
+      type: String
+      required: true
+      hint: The client ID known to $Application.
+    redirect_uri:
+      type: String        
+      required: true
+      hint: $Application will redirect to this URL after the successful authentication and approval by user.
+    state:
+      type: String
+      hint: Data duplicated in the 'return_url' after the successful authentication. 
+    scope: 
+      type: String
+      hint: List of scopes associated with the access token.
+  _output:
+    state:
+      type: String
+      hint: Data copied from the 'authorize' link to the 'return_uri' after successful authentication. Compare the value to the original before an attempt to get the token.
+    token:
+      hint: $Application will redirect to the 'redirect_uri' specified in the 'authorize' link after the successful authorization. Copy the 'code' parameter received in the 'return_uri' to the 'code' key. Post the 'token' object to the 'token' link to obtain the access token.
+      properties:
+        grant_type:
+          type: String
+          required: true
+          values: 
+          - authorization_code
+          hint: Specifies the type of the token grant requested.
+        code:
+          type: String
+          required: true
+          hint: The value returned in the 'redirect_uri' after the successful authentication and approval by user.
+        redirect_uri:
+          type: String        
+          required: true
+          hint: $Application will redirect to this URL after the successful authentication and approval by user.
+        client_id:
+          type: String        
+          required: true
+          hint: The client ID known to $Application.
+# -----------------------------
+# POST oauth2/v2/auth/server
+# -----------------------------
+post/auth/server:
+  hint: Constructs the 'authorize' link and the 'token' data that will allow exchanging an authorizaton code for an access token. This type of authorization is suitable for the server clients.
+  _input:
+    client_id:
+      type: String
+      required: true
+      hint: The client ID known to $Application.
+    client_secret:
+      type: String
+      required: true
+      hint: The client secret known to $Application.
+    redirect_uri:
+      type: String        
+      required: true
+      hint: $Application will redirect to this URL after the successful authentication and approval by user.
+    state:
+      type: String
+      hint: Data duplicated in the 'return_url' after the successful authentication. 
+    scope: 
+      type: String
+      hint: List of scopes associated with the access token.
+    code_challenge:
+      type: String
+      hint: Proof Key for Code Exchange (PKCE) in the base64 url-encoded or plain format. It will be associated with the authorization code. The value is automatically generated with 'S256' method if not specified.
+    code_challenge_method:
+      type: String
+      values: 
+      - S256
+      - plain
+      hint: Indicates the method used to construct the 'code_challenge'.
+  _output:
+    state:
+      type: String
+      hint: The data copied from the 'authorize' link to the 'return_uri' after successful authentication. Compare the value to the original before an attempt to get the token.
+    token:
+      hint: Post the 'token' data to the 'self' link to exchange an authorization code for an access token.
+      properties:
+        grant_type:
+          type: String
+          required: true
+          values: 
+          - authorization_code
+          hint: Specifies the type of the token grant requested.
+        code:
+          type: String
+          required: true
+          hint: The value returned in the 'redirect_uri' after the successful authentication and approval by user.
+        redirect_uri:
+          type: String        
+          required: true
+          hint: $Application will redirect to this URL after the successful authentication and approval by user.
+        client_id:
+          type: String        
+          required: true
+          hint: The client ID known to $Application.
+        client_secret:
+          type: String        
+          required: true
+          hint: The client secret known to $Application.
+        code_verifier:
+          type: String        
+          required: true
+          hint: The original Proof Key for Code Exchange (PKCE) that was encoded in the 'authorize' link.
+# -----------------------------
+# POST oauth2/v2/auth
+# -----------------------------
+post/auth:
+  _input:
+    request_id:
+      type: String
+      required: true
+      hint: The identifier of the request created by $Applicaton in the response to GET to 'oauth2/v2/auth' endpoint. 
+    timezone: 
+      type: String
+    consent:
+      type: String
+      required: true
+      values:
+      - allow
+      - deny
+      hint: Specified if the user has allowed or denied the request. The user identity must be specified in the 'Authorization' header.
+# -----------------------------
+# POST oauth2/v2/token
+# -----------------------------
+post/token:
+  hint: Exchanges the authorization code for an access token when the 'grant_type' is set to 'authorization_code'. Refreshes the access token when the 'grant_type' is set to 'refresh_token'. 
+  _input:
+    grant_type:
+      type: String
+      required: true
+      values:
+      - authorization_code
+      - refresh_token
+      hint: Specifies the type of grant.
+    code:
+      type: String
+      hint: Auhtorization code to be exchanged for the access token when the 'grant_type' is set to 'authorization_code'.
+    refresh_token:
+      type: String
+      hint: Refresh token to be exchanged for the access token when the 'grant_type' is set to 'refresh_token'.
+    redirect_uri:
+      type: String        
+      hint: $Application will redirect to this URL after the successful authentication and approval by user.
+    client_id:
+      type: String        
+      required: true
+      default: $username
+      hint: The client ID known to $Application. The value can be specified as the username in the Basic Auth header.
+    client_secret:
+      type: String
+      default: $password
+      hint: The client secret known to $Application. The value can be specified as the password in the Basic Auth header.
+    code_verifier:
+      type: String        
+      hint: The original Proof Key for Code Exchange (PKCE) that was encoded in the 'authorize' link.
+    scope: 
+      type: String
+      hint: List of scopes associated with the 'access_token' exchanged for the 'refresh_token' input parameter.
+  _output: 
+    access_token:
+      type: String
+      required: true
+      hint: The access token that can be used as Bearer Auth header when making requests to the APIs.
+    expires_in:
+      type: Int32
+      required: true
+      hint: Specified the duration in seconds while the 'access_token' remains valid.
+    token_type:
+      type: String
+      required: true
+      hint: Specified the prefix that must preceed the access token or refresh token value when specified in the 'Authorization' header.
+    id_token:
+      type: String
+      hint: The optional user information token in JWT format.
+    refresh_token:
+      type: String
+      hint: The optional refresh token that can be used with 'refresh_token' grant type to produce a new access token. 
+    scope: 
+      type: String
+      hint: List of scopes associated with the access token.
+# -----------------------------
+# POST oauth2/v2/revoke
+# -----------------------------
+post/revoke:
+  hint: Revokes the specified token.
+  _input:
+    client_id:
+      type: String        
+      required: true
+      default: $username
+      hint: The client ID known to $Application. The value can be specified as the username in the Basic Auth header.
+    client_secret:
+      type: String
+      default: $password
+      hint: The client secret known to $Application. The value can be specified as the password in the Basic Auth header.
+    token:
+      type: String
+      required: true
+      hint: Previously issued access token or refresh token.
+# -----------------------------
+# POST oauth2/v2/userinfo
+# -----------------------------
+post/userinfo:
+  hint: Returns the Open ID users claims for a given token specified in the Bearer Auth header.
+  _output:
+    sub: 
+      type: String
+      hint: The unique identifier of the user.
+    email: 
+      type: String
+      hint: The email address of the user.
+    email_verified: 
+      type: Boolean
+      hint: Indicates if the email has been verified.
+    locale: 
+      type: String
+      hint: The locale of the user.
+# -----------------------------------------------
+# GET oauth2/v2/userinfo/pictures/$type/$filename
+# -----------------------------------------------
+get/userinfo/pictures/$type/$filename:
+  hint: Returns the user photo specified in 'type'. For example, photos/original or photos/thumbnail. 
+  _path: 
+    pictures:
+      literal: true
+    type: 
+      type: String
+      required: true
+      values:
+      - original
+      - thumbnail
+      hint: The type of user photo requested.
+    filename:
+      type: String
+      required: true
+# -------------------------------------
+# GET oauth2/v2/userinfo/pictures/$type
+# -------------------------------------
+get/userinfo/pictures/$type:
+  hint: Returns the user photo specified in 'type'. For example, photos/original or photos/thumbnail. 
+  _path: 
+    pictures:
+      literal: true
+    type: 
+      type: String
+      required: true
+      values:
+      - original
+      - thumbnail
+      hint: The type of user photo requested.
+# -----------------------------
+# GET oauth2/v2/tokeninfo
+# -----------------------------
+get/tokeninfo:
+  hint: Validates and returns the token info.
+  _parameters: 
+    id_token: 
+      type: String
+      required: true
+      hint: The 'id_token' in JTW format.
+# -----------------------------
+# GET oauth2/v2/auth
+# -----------------------------
+get/auth:
+  hint: $Application will switch to the authorization mode and display the user interface. The authorization request reference is stored in the '.oauth2' cookie to ensure that application remains in the authorization mode. Unauthenticated user will be prompted to sign in. Authenticated user will be presented with the prompt to approve the authorization request. $Application will redirect to the 'redirect_uri' when the authorization request is allowed or denied by the user.
+  _parameters:
+    client_id:
+      type: String        
+      required: true
+      hint: The client ID known to $Application.
+    response_type:
+      type: String
+      required: true
+      values: 
+      - code
+      hint: Specifies the type of the expected response. The 'code' parameter can be exchanged for an access token.
+    client_secret:
+      type: String        
+      hint: The client secret known to $Application.
+    redirect_uri:
+      type: String        
+      required: true
+      hint: $Application will redirect to this URL after the successful authentication and approval by user.
+    state:
+      type: String
+      required: true
+      hint: Data duplicated in the 'return_url' after the successful authentication. 
+    scope: 
+      type: String
+      hint: List of scopes associated with the access token.
+    code_challenge:
+      type: String
+      hint: Proof Key for Code Exchange (PKCE) in the base64 url-encoded or plain format. It will be associated with the authorization code. 
+    code_challenge_method:
+      type: String
+      values: 
+      - S256
+      - plain
+      hint: Indicates the method used to construct the 'code_challenge'.
+# -----------------------------
+# GET oauth2/v2/apps
+# -----------------------------
+get/apps:
+  _roles: Administrators, OAuth2 Admin
+  _output: patch/apps/$client_id._output
+# -----------------------------
+# POST oauth2/v2/apps
+# -----------------------------
+post/apps:
+  _roles: Administrators, OAuth2 Admin
+  _path:
+    apps:
+      literal: true
+  _input:
+    name:
+      type: String
+      required: true
+      hint: The client application name.
+    author: 
+      type: String
+      required: true
+      hint: The client application author.
+    client_secret:
+      type: String
+      hint: The client secret known to $Application.
+    redirect_uri:
+      type: String        
+      required: true
+      hint: $Application will redirect to this URL after the successful authentication and approval by user. 
+    local_redirect_uri:
+      type: String        
+      hint: $Application will redirect to this local URL after the successful authentication and approval by user. 
+    authorization:
+      hint: Supported client authorization methods.
+      required: true
+      properties:
+        native: 
+          type: Boolean
+          default: false
+          hint: Native client application can get an access token in exchange for the authorization 'code', proof key of code exchange 'verification_code', and 'redirect_uri'.
+        spa: 
+          type: Boolean
+          default: false
+          hint: SPA client application can get an access token in exchange for the authorization 'code' and 'redirect_uri'.
+        server: 
+          type: Boolean
+          default: false
+          hint: Server application can get an access token in exchange for the authorization 'code', proof key of code exchange 'verification_code', 'client_secret', and 'redirect_uri'.
+    trusted:
+      type: Boolean
+      default: false
+      hint: Specifies if the the client is trusted by $Application. Explicit authorization of the account access by users is skipped for the trusted client apps.
+# ---------------------------------------
+# GET oauth2/v2/apps/$client_id
+# ---------------------------------------
+get/apps/$client_id:
+  _roles: Administrators, OAuth2 Admin
+  _path: patch/apps/$client_id._path
+  _output: patch/apps/$client_id._output
+# ---------------------------------------
+# DELETE oauth2/v2/apps/$client_id
+# ---------------------------------------
+delete/apps/$client_id:
+  _roles: Administrators, OAuth2 Admin
+  _path: patch/apps/$client_id._path
+# ---------------------------------------
+# PATCH oauth2/v2/apps/$client_id
+# ---------------------------------------
+patch/apps/$client_id:
+  _roles: Administrators, OAuth2 Admin
+  _path:
+    apps:
+      literal: true
+    client_id: 
+      type: String
+      required: true
+      hint: The cient ID of the application.
+  _input: patch/apps/$client_id._output
+  _output:
+    name:
+      type: String
+      required: true
+      hint: The client application name.
+    author: 
+      type: String
+      required: true
+      hint: The client application author.
+    client_secret:
+      type: String
+      hint: The client secret known to $Application.
+    redirect_uri:
+      type: String        
+      required: true
+      hint: $Application will redirect to this URL after the successful authentication and approval by user. 
+    local_redirect_uri:
+      type: String        
+      hint: $Application will redirect to this local URL after the successful authentication and approval by user. 
+    authorization:
+      hint: Supported authorization methods.
+      required: true
+      properties:
+        native: 
+          type: Boolean
+          required: true
+          hint: Native client application can get an access token in exchange for the authorization 'code', proof key of code exchange 'verification_code', and 'redirect_uri'.
+        spa: 
+          type: Boolean
+          required: true
+          hint: SPA client application can get an access token in exchange for the authorization 'code' and 'redirect_uri'.
+        server: 
+          type: Boolean
+          required: true
+          hint: Server application can get an access token in exchange for the authorization 'code', proof key of code exchange 'verification_code', 'client_secret', and 'redirect_uri'.
+    trusted:
+      type: Boolean
+      default: false
+      hint: Specifies if the the client is trusted by $Application. Explicit authorization of the account access by users is skipped for the trusted client apps.

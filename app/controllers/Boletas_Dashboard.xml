@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Boletas_Dashboard" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="EntregaDeposito" type="DataView" label="Entrega Deposito">
+      <dataView controller="EntregaDeposito" view="grid1" filterSource="DetalleDevLicencias" filterFields="IDDetalleDevolucion" />
+    </field>
+  </fields>
+</dataController>

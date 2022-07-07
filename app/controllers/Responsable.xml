@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Responsable" conflictDetection="overwriteChanges" label="Responsable" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"RESPONSABLE"."ID_RESPONSABLE" "IDResponsable"
+	,"RESPONSABLE"."NOMBRE_RESPONSABLE" "NombreResponsable"
+	,"RESPONSABLE"."OBSERVACIONES" "Observaciones"
+	,"RESPONSABLE"."ESTADO" "Estado"
+	,"RESPONSABLE"."CORREO" "Correo"
+	,"RESPONSABLE"."USUARIO_CREACION" "UsuarioCreacion"
+	,"RESPONSABLE"."FECHA_CREACION" "FechaCreacion"
+	,"RESPONSABLE"."USUARIO_ACTUALIZA" "UsuarioActualiza"
+	,"RESPONSABLE"."FECHA_ACTUALIZA" "FechaActualiza"
+from "dbo"."RESPONSABLE" "RESPONSABLE"
+]]></text>
+    </command>
+    <command id="ID_RESPONSABLEIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="IDResponsable" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="IDResponsable" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Responsable" readOnly="true" />
+    <field name="NombreResponsable" type="String" label="Nombre Responsable" length="100" showInSummary="true" />
+    <field name="Observaciones" type="String" allowNulls="false" label="Observaciones" length="200" showInSummary="true" />
+    <field name="Estado" type="String" allowNulls="false" label="Estado" length="1" showInSummary="true" />
+    <field name="Correo" type="String" allowNulls="false" label="Correo" length="200" showInSummary="true" />
+    <field name="UsuarioCreacion" type="String" label="Usuario Creacion" length="50" showInSummary="true" />
+    <field name="FechaCreacion" type="DateTime" dataFormatString="g" label="Fecha Creacion" />
+    <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="50" />
+    <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Responsable">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="NombreResponsable" />
+        <dataField fieldName="Observaciones" />
+        <dataField fieldName="Estado" columns="1" />
+        <dataField fieldName="Correo" />
+        <dataField fieldName="UsuarioCreacion" columns="50" />
+        <dataField fieldName="FechaCreacion" columns="20" />
+        <dataField fieldName="UsuarioActualiza" columns="50" />
+        <dataField fieldName="FechaActualiza" columns="20" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Responsable" tags="material-icon-edit">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Responsable" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NombreResponsable" />
+            <dataField fieldName="Observaciones" />
+            <dataField fieldName="Estado" columns="1" textMode="Static" />
+            <dataField fieldName="Correo" />
+            <dataField fieldName="UsuarioCreacion" columns="50" textMode="Static" />
+            <dataField fieldName="FechaCreacion" columns="20" textMode="Static" />
+            <dataField fieldName="UsuarioActualiza" columns="50" textMode="Static" />
+            <dataField fieldName="FechaActualiza" columns="20" textMode="Static" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="Nuevo Responsable" tags="material-icon-person-add">
+      <headerText />
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NombreResponsable" />
+            <dataField fieldName="Observaciones" />
+            <dataField fieldName="Estado" columns="1" textMode="Static" />
+            <dataField fieldName="Correo" />
+            <dataField fieldName="UsuarioCreacion" columns="50" textMode="Static" />
+            <dataField fieldName="FechaCreacion" columns="20" textMode="Static" />
+            <dataField fieldName="UsuarioActualiza" columns="50" textMode="Static" />
+            <dataField fieldName="FechaActualiza" columns="20" textMode="Static" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[set @UsuarioCreacion=@BusinessRules_UserName
+set @FechaCreacion=GETDATE()
+set @Estado='A'
+set @UsuarioActualiza=@BusinessRules_UserName
+set @FechaActualiza=GETDATE()]]></rule>
+  </businessRules>
+</dataController>

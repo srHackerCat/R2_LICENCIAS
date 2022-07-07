@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
+    <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide" />
+    <siteMapNode title="CONFIGURACIONES" description="" url="~/pages/configuraciones" roles="*" cssClass="material-icon-perm_identity" />
+    <siteMapNode title="PROVEEDORES" description="View Proveedorr" url="~/pages/proveedores" />
+    <siteMapNode title="LICENCIAS" description="" url="~/pages/licenciass" roles="*">
+      <siteMapNode title="LICENCIAS CONSTRUCCION" description="" url="~/pages/licencias_construccion" roles="*" />
+      <siteMapNode title="LICENCIAS IT" description="" url="~/pages/licencias_it" roles="*" />
+    </siteMapNode>
+    <siteMapNode title="REPORTERIA" description="" url="~/pages/modulo-reporteria" roles="*">
+      <siteMapNode title="REPORTE GENERAL" description="" url="~/pages/reporte_general" roles="*" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

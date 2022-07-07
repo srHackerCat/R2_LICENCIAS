@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="LICENCIAS_CONSTRC" conflictDetection="overwriteChanges" label="LICENCIAS_CONSTRC" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="ID_LICENCIA" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Licencia" readOnly="true" />
+    <field name="NO_LICENCIA" type="String" allowNulls="false" label="No Licencia" length="50" showInSummary="true" />
+    <field name="ID_AUTORIZADO" type="Int32" allowNulls="false" label="Id Autorizado" showInSummary="true" />
+    <field name="ID_PROVEEDOR" type="Int32" label="Id Proveedor" showInSummary="true">
+      <items style="Lookup" dataController="Proveedores" dataView="grid1" dataTextField="NOMBRE_COMERCIAL" dataValueField="ID_PROVEEDOR" />
+    </field>
+    <field name="FECHA_INICIO" type="DateTime" allowNulls="false" label="Fecha Inicio" showInSummary="true" />
+    <field name="FECHA_VENCIMIENTO" type="DateTime" allowNulls="false" label="Fecha Vencimiento" showInSummary="true" />
+    <field name="ID_OCUPACION" type="Int32" label="Id Ocupacion" />
+    <field name="VALOR_DEPOSITO" type="Decimal" allowNulls="false" label="Valor Deposito" />
+    <field name="FECHA_PAGO" type="DateTime" allowNulls="false" label="Fecha Pago" />
+    <field name="COMENTARIO" type="String" label="Comentario" length="150" />
+    <field name="USUARIO_CREA" type="String" label="Usuario Crea" length="20" />
+    <field name="FECHA_CREA" type="DateTime" label="Fecha Crea" />
+    <field name="USUARIO_ACTUALIZA" type="String" label="Usuario Actualiza" length="20" />
+    <field name="FECHA_ACTUALIZA" type="DateTime" label="Fecha Actualiza" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Licencias Constrc">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="NO_LICENCIA" columns="50" />
+        <dataField fieldName="ID_AUTORIZADO" columns="15" />
+        <dataField fieldName="ID_PROVEEDOR" columns="15" />
+        <dataField fieldName="FECHA_INICIO" columns="10" />
+        <dataField fieldName="FECHA_VENCIMIENTO" columns="10" />
+        <dataField fieldName="ID_OCUPACION" columns="15" />
+        <dataField fieldName="VALOR_DEPOSITO" columns="15" />
+        <dataField fieldName="FECHA_PAGO" columns="10" />
+        <dataField fieldName="COMENTARIO" />
+        <dataField fieldName="USUARIO_CREA" columns="20" />
+        <dataField fieldName="FECHA_CREA" columns="10" />
+        <dataField fieldName="USUARIO_ACTUALIZA" columns="20" />
+        <dataField fieldName="FECHA_ACTUALIZA" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Licencias Constrc">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Licencias Constrc" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NO_LICENCIA" columns="50" />
+            <dataField fieldName="ID_AUTORIZADO" columns="15" />
+            <dataField fieldName="ID_PROVEEDOR" columns="15" />
+            <dataField fieldName="FECHA_INICIO" columns="10" />
+            <dataField fieldName="FECHA_VENCIMIENTO" columns="10" />
+            <dataField fieldName="ID_OCUPACION" columns="15" />
+            <dataField fieldName="VALOR_DEPOSITO" columns="15" />
+            <dataField fieldName="FECHA_PAGO" columns="10" />
+            <dataField fieldName="COMENTARIO" />
+            <dataField fieldName="USUARIO_CREA" columns="20" />
+            <dataField fieldName="FECHA_CREA" columns="10" />
+            <dataField fieldName="USUARIO_ACTUALIZA" columns="20" />
+            <dataField fieldName="FECHA_ACTUALIZA" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Licencias Constrc">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Licencias Constrc" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NO_LICENCIA" columns="50" />
+            <dataField fieldName="ID_AUTORIZADO" columns="15" />
+            <dataField fieldName="ID_PROVEEDOR" columns="15" />
+            <dataField fieldName="FECHA_INICIO" columns="10" />
+            <dataField fieldName="FECHA_VENCIMIENTO" columns="10" />
+            <dataField fieldName="ID_OCUPACION" columns="15" />
+            <dataField fieldName="VALOR_DEPOSITO" columns="15" />
+            <dataField fieldName="FECHA_PAGO" columns="10" />
+            <dataField fieldName="COMENTARIO" />
+            <dataField fieldName="USUARIO_CREA" columns="20" />
+            <dataField fieldName="FECHA_CREA" columns="10" />
+            <dataField fieldName="USUARIO_ACTUALIZA" columns="20" />
+            <dataField fieldName="FECHA_ACTUALIZA" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[SELECT *FROM LICENCIAS_CONSTRUCCION]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

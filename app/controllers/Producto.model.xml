@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PRODUCTO" alias="PRODUCTO" created="2022-02-22T10:32:45" modified="2022-03-01T09:38:15" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TIPO_PRODUCTO" parentTableSchema="dbo" parentTableName="TIPO_PRODUCTO" x="354" y="20">
+      <foreignKeyColumn columnName="ID_TIPO_PRODUCTO" parentColumnName="ID_TIPO_PRODUCTO" />
+    </foreignKey>
+    <foreignKey id="RESPONSABLE" parentTableSchema="dbo" parentTableName="RESPONSABLE" x="354" y="503">
+      <foreignKeyColumn columnName="ID_RESPONSABLE" parentColumnName="ID_RESPONSABLE" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ID_PRODUCTO" fieldName="IDProducto" label="Id Producto" />
+    <column name="ID_TIPO_PRODUCTO" fieldName="IDTipoProducto" label="Id Tipo Producto" aliasColumnName="DESCRIPCION" aliasForeignKey="TIPO_PRODUCTO" />
+    <column name="DESCRIPCION" fieldName="TipoProductoDescripcion" label="Tipo Producto Descripcion" foreignKey="TIPO_PRODUCTO" />
+    <column name="ID_LICENCIAMIENTO" fieldName="IDLicenciamiento" label="Id Licenciamiento" />
+    <column name="ID_PROVEEDOR" fieldName="IDProveedor" label="Id Proveedor" />
+    <column name="ID_RESPONSABLE" fieldName="IDResponsable" label="Id Responsable" aliasColumnName="NOMBRE_RESPONSABLE" aliasForeignKey="RESPONSABLE" />
+    <column name="NOMBRE_RESPONSABLE" fieldName="ResponsableNombreResponsable" label="Responsable Nombre Responsable" foreignKey="RESPONSABLE" />
+    <column name="DESCRIPCION" fieldName="Descripcion" label="Descripcion" />
+    <column name="COMENTARIOS" fieldName="Comentarios" label="Comentarios" />
+    <column name="FECHA_EXPIRA" fieldName="FechaExpira" label="Fecha Expira" format="g" />
+    <column name="ESTADO" fieldName="Estado" label="Estado" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+  </columns>
+</dataModel>

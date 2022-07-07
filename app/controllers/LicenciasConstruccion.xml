@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="LicenciasConstruccion" conflictDetection="overwriteChanges" label="Licencias Construccion" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" custom="false">
+      <text><![CDATA[select
+	"LICENCIAS_CONSTRUCCION"."ID_LICENCIA" "IDLicencia"
+	,"LICENCIAS_CONSTRUCCION"."NO_LICENCIA" "NoLicencia"
+	,"LICENCIAS_CONSTRUCCION"."ID_AUTORIZADO" "IDAutorizado"
+	,"TheID_AUTORIZADO"."UBICACION" "TheidAutorizadoubicacion"
+	,"TheID_AUTORIZADOID_PROYECTO"."NOMBRE_PROYECTO" "TheidAutorizadoidProyectonombreProyecto"
+	,"LICENCIAS_CONSTRUCCION"."ID_PROVEEDOR" "IDProveedor"
+	,"PROVEEDORES"."NOMBRE_COMERCIAL" "ProveedoresNombreComercial"
+	,"LICENCIAS_CONSTRUCCION"."FECHA_VENCIMIENTO" "FechaVencimiento"
+	,"LICENCIAS_CONSTRUCCION"."USUARIO_CREA" "UsuarioCrea"
+	,"LICENCIAS_CONSTRUCCION"."FECHA_CREA" "FechaCrea"
+	,"LICENCIAS_CONSTRUCCION"."USUARIO_ACTUALIZA" "UsuarioActualiza"
+	,"LICENCIAS_CONSTRUCCION"."FECHA_ACTUALIZA" "FechaActualiza"
+	,"LICENCIAS_CONSTRUCCION"."VALOR_DEPOSITO" "ValorDeposito"
+	,"LICENCIAS_CONSTRUCCION"."ID_ESTADO" "IDEstado"
+	,"ESTADOS"."ESTADO" "EstadosEstado"
+	,"LICENCIAS_CONSTRUCCION"."ID_EMAIL_AVISO" "IDEmailAviso"
+	,"EMAIL_AVISO"."NOMBRE1" "EmailAvisoNombre1"
+	,"EMAIL_AVISO"."NOMBRE2" "EmailAvisoNombre2"
+	,"EMAIL_AVISO"."NOMBRE3" "EmailAvisoNombre3"
+	,"EMAIL_AVISO"."NOMBRE4" "EmailAvisoNombre4"
+	,"EMAIL_AVISO"."NOMBRE5" "EmailAvisoNombre5"
+	,"LICENCIAS_CONSTRUCCION"."OBSERVACION" "Observacion"
+	,"LICENCIAS_CONSTRUCCION"."FECHA_DEPOSITO" "FechaDeposito"
+from "dbo"."LICENCIAS_CONSTRUCCION" "LICENCIAS_CONSTRUCCION"
+	left join "dbo"."AUTORIZADO" "TheID_AUTORIZADO" on "LICENCIAS_CONSTRUCCION"."ID_AUTORIZADO" = "TheID_AUTORIZADO"."ID_AUTORIZADO"
+	left join "dbo"."PROYECTO" "TheID_AUTORIZADOID_PROYECTO" on "TheID_AUTORIZADO"."ID_PROYECTO" = "TheID_AUTORIZADOID_PROYECTO"."ID_PROYECTO"
+	left join "dbo"."ESTADOS" "ESTADOS" on "LICENCIAS_CONSTRUCCION"."ID_ESTADO" = "ESTADOS"."ID_ESTADO"
+	left join "dbo"."PROVEEDORES" "PROVEEDORES" on "LICENCIAS_CONSTRUCCION"."ID_PROVEEDOR" = "PROVEEDORES"."ID_PROVEEDOR"
+	left join "dbo"."EMAIL_AVISO" "EMAIL_AVISO" on "LICENCIAS_CONSTRUCCION"."ID_EMAIL_AVISO" = "EMAIL_AVISO"."ID_EMAIL_AVISO"]]></text>
+    </command>
+    <command id="ID_LICENCIAIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="IDLicencia" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="IDLicencia" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Licencia" readOnly="true" />
+    <field name="NoLicencia" type="String" allowNulls="false" label="No Licencia" length="50" showInSummary="true" />
+    <field name="IDAutorizado" type="Int32" allowNulls="false" label="Autorizado para" showInSummary="true">
+      <items style="Lookup" dataController="Autorizado" newDataView="createForm1" dataValueField="IDAutorizado" dataTextField="Ubicacion" copy="TheidAutorizadoidProyectonombreProyecto=TheidProyectonombreProyecto" />
+    </field>
+    <field name="TheidAutorizadoubicacion" type="String" readOnly="true" label="Autorizado para" length="50" />
+    <field name="TheidAutorizadoidProyectonombreProyecto" type="String" readOnly="true" label="Pertenece a" length="50" />
+    <field name="IDProveedor" type="Int32" allowNulls="false" label="Proveedor" showInSummary="true">
+      <items dataView="grid1" style="Lookup" dataController="Proveedores1" dataTextField="NombreComercial" dataValueField="IDProveedor" />
+    </field>
+    <field name="ProveedoresNombreComercial" type="String" readOnly="true" label="Proveedores Nombre Comercial" length="300" />
+    <field name="FechaVencimiento" type="DateTime" allowNulls="false" dataFormatString="g" label="Fecha Vencimiento" showInSummary="true" />
+    <field name="UsuarioCrea" type="String" label="Usuario Crea" length="20" showInSummary="true" />
+    <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
+    <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" />
+    <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+    <field name="ValorDeposito" type="Decimal" allowNulls="false" label="Valor Deposito" />
+    <field name="IDEstado" type="Int32" allowNulls="false" label="Estado">
+      <items style="ListBox" dataController="Estados" dataValueField="IDEstado" dataTextField="Estado" dataView="grid1" />
+    </field>
+    <field name="EstadosEstado" type="String" readOnly="true" label="Estado" length="50" />
+    <field name="IDEmailAviso" type="Int32" allowNulls="false" label="Aviso">
+      <items style="Lookup" dataController="EmailAviso" dataValueField="IDEmailAviso" dataTextField="Clasificacion" copy="EmailAvisoNombre1=Nombre1,&#xD;&#xA;EmailAvisoNombre2=Nombre2, EmailAvisoNombre3=Nombre3, EmailAvisoNombre4=Nombre4, EmailAvisoNombre5=Nombre5" dataView="grid1" />
+    </field>
+    <field name="EmailAvisoNombre1" type="String" readOnly="true" label="Email Aviso Nombre 1" length="50" />
+    <field name="EmailAvisoNombre2" type="String" readOnly="true" label="Email Aviso Nombre 2" length="50" />
+    <field name="EmailAvisoNombre3" type="String" readOnly="true" label="Email Aviso Nombre 3" length="50" />
+    <field name="EmailAvisoNombre4" type="String" readOnly="true" label="Email Aviso Nombre 4" length="50" />
+    <field name="EmailAvisoNombre5" type="String" readOnly="true" label="Email Aviso Nombre 5" length="50" />
+    <field name="Observacion" type="String" label="Observacion" length="150" />
+    <field name="FechaDeposito" type="DateTime" allowNulls="false" dataFormatString="g" label="Fecha Deposito" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Licencias Construccion">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="NoLicencia" columns="50">
+          <headerText>No. Licencia</headerText>
+        </dataField>
+        <dataField fieldName="FechaVencimiento" columns="20">
+          <headerText>Fecha de Vencimiento</headerText>
+        </dataField>
+        <dataField fieldName="FechaDeposito" columns="20">
+          <headerText>Fecha de Pago Licencia</headerText>
+        </dataField>
+        <dataField fieldName="ValorDeposito" columns="15">
+          <headerText>Monto</headerText>
+        </dataField>
+        <dataField fieldName="Observacion" />
+        <dataField fieldName="IDProveedor" aliasFieldName="ProveedoresNombreComercial">
+          <headerText>Proveedor</headerText>
+        </dataField>
+        <dataField fieldName="IDAutorizado" aliasFieldName="TheidAutorizadoubicacion">
+          <headerText>Autorizado para</headerText>
+        </dataField>
+        <dataField fieldName="TheidAutorizadoidProyectonombreProyecto" columns="50" />
+        <dataField fieldName="IDEstado" aliasFieldName="EstadosEstado">
+          <headerText>Estado</headerText>
+        </dataField>
+        <dataField fieldName="IDEmailAviso" columns="15">
+          <headerText>Aviso</headerText>
+        </dataField>
+        <dataField fieldName="EmailAvisoNombre1" columns="50">
+          <headerText>Aviso 1</headerText>
+        </dataField>
+        <dataField fieldName="EmailAvisoNombre2" columns="50">
+          <headerText>Aviso 2</headerText>
+        </dataField>
+        <dataField fieldName="EmailAvisoNombre3" columns="50">
+          <headerText>Aviso 3</headerText>
+        </dataField>
+        <dataField fieldName="EmailAvisoNombre4" columns="50">
+          <headerText>Aviso 4</headerText>
+        </dataField>
+        <dataField fieldName="EmailAvisoNombre5" columns="50">
+          <headerText>Aviso 5</headerText>
+        </dataField>
+        <dataField fieldName="UsuarioCrea" columns="20" />
+        <dataField fieldName="FechaCrea" columns="20" />
+        <dataField fieldName="UsuarioActualiza" columns="20" />
+        <dataField fieldName="FechaActualiza" columns="20" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Licencias Construccion">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NoLicencia" columns="50">
+              <headerText>No. Licencia</headerText>
+            </dataField>
+            <dataField fieldName="FechaVencimiento" columns="20">
+              <headerText>Fecha de Vencimiento</headerText>
+            </dataField>
+            <dataField fieldName="FechaDeposito" columns="20">
+              <headerText>Fecha de Pago Licencia</headerText>
+            </dataField>
+            <dataField fieldName="ValorDeposito" columns="15">
+              <headerText>Monto</headerText>
+            </dataField>
+            <dataField fieldName="Observacion" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="IDProveedor" aliasFieldName="ProveedoresNombreComercial">
+              <headerText>Proveedor</headerText>
+            </dataField>
+            <dataField fieldName="IDAutorizado" aliasFieldName="TheidAutorizadoubicacion">
+              <headerText>Autorizado para</headerText>
+            </dataField>
+            <dataField fieldName="TheidAutorizadoidProyectonombreProyecto" columns="50" />
+            <dataField fieldName="IDEstado" aliasFieldName="EstadosEstado">
+              <headerText>Estado</headerText>
+            </dataField>
+            <dataField fieldName="IDEmailAviso" columns="15">
+              <headerText>Aviso</headerText>
+            </dataField>
+          </dataFields>
+          <description><![CDATA[$DefaultNewDescription]]></description>
+        </category>
+        <category id="c3" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="EmailAvisoNombre1" columns="50">
+              <headerText>Aviso 1</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre2" columns="50">
+              <headerText>Aviso 2</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre3" columns="50">
+              <headerText>Aviso 3</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre4" columns="50">
+              <headerText>Aviso 4</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre5" columns="50">
+              <headerText>Aviso 5</headerText>
+            </dataField>
+            <dataField fieldName="UsuarioCrea" columns="20" />
+            <dataField fieldName="FechaCrea" columns="20" />
+            <dataField fieldName="UsuarioActualiza" columns="20" />
+            <dataField fieldName="FechaActualiza" columns="20" />
+          </dataFields>
+          <description><![CDATA[BITACORA]]></description>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Licencias Construccion">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NoLicencia" columns="50">
+              <headerText>No. Licencia</headerText>
+            </dataField>
+            <dataField fieldName="FechaVencimiento" columns="20">
+              <headerText>Fecha de Vencimiento</headerText>
+            </dataField>
+            <dataField fieldName="FechaDeposito" columns="20">
+              <headerText>Fecha de Pago Licencia</headerText>
+            </dataField>
+            <dataField fieldName="ValorDeposito" columns="15">
+              <headerText>Monto</headerText>
+            </dataField>
+            <dataField fieldName="Observacion" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="IDProveedor" aliasFieldName="ProveedoresNombreComercial">
+              <headerText>Proveedor</headerText>
+            </dataField>
+            <dataField fieldName="IDAutorizado" aliasFieldName="TheidAutorizadoubicacion">
+              <headerText>Autorizado para</headerText>
+            </dataField>
+            <dataField fieldName="TheidAutorizadoidProyectonombreProyecto" columns="50" />
+            <dataField fieldName="IDEstado" aliasFieldName="EstadosEstado">
+              <headerText>Estado</headerText>
+            </dataField>
+            <dataField fieldName="IDEmailAviso" columns="15">
+              <headerText>Aviso</headerText>
+            </dataField>
+          </dataFields>
+          <description><![CDATA[$DefaultNewDescription]]></description>
+        </category>
+        <category id="c3" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="EmailAvisoNombre1" columns="50">
+              <headerText>Aviso 1</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre2" columns="50">
+              <headerText>Aviso 2</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre3" columns="50">
+              <headerText>Aviso 3</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre4" columns="50">
+              <headerText>Aviso 4</headerText>
+            </dataField>
+            <dataField fieldName="EmailAvisoNombre5" columns="50">
+              <headerText>Aviso 5</headerText>
+            </dataField>
+            <dataField fieldName="UsuarioCrea" columns="20" />
+            <dataField fieldName="FechaCrea" columns="20" />
+            <dataField fieldName="UsuarioActualiza" columns="20" />
+            <dataField fieldName="FechaActualiza" columns="20" />
+          </dataFields>
+          <description><![CDATA[BITACORA]]></description>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Before"><![CDATA[Set @IDEstado = 1]]></rule>
+  </businessRules>
+</dataController>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="DETALLE_PAGO_LICENCIA" alias="DETALLE_PAGO_LICENCIA" created="2022-03-01T08:44:35" modified="2022-05-04T15:30:35" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ID_LICENCIA_PAGO" fieldName="IDLicenciaPago" label="Id Licencia Pago" />
+    <column name="ID_PRODUCTO" fieldName="IDProducto" label="Id Producto" />
+    <column name="SERIE_FACTURA" fieldName="SerieFactura" label="Serie Factura" />
+    <column name="NUMERO_FACTURA" fieldName="NumeroFactura" label="Numero Factura" />
+    <column name="MONTO_ML" fieldName="MontoMl" label="Monto Ml" />
+    <column name="ESTADO" fieldName="Estado" label="Estado" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+  </columns>
+</dataModel>

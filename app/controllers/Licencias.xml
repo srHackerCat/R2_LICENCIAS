@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Licencias" label="Licencias" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" custom="false">
+      <text><![CDATA[select
+	"LICENCIAS"."ID_LICENCIA" "IDLicencia"
+	,"LICENCIAS"."NO_LICENCIA" "NoLicencia"
+	,"LICENCIAS"."ID_TIPO_LICENCIA" "IDTipoLicencia"
+	,"TIPO_LICENCIA"."DESCRIPCION" "TipoLicenciaDescripcion"
+	,"LICENCIAS"."ID_PROVEEDOR" "IDProveedor"
+	,"PROVEEDORR"."NOMBRE_COMERCIAL" "ProveedorrNombreComercial"
+	,"LICENCIAS"."ID_ESTADO" "IDEstado"
+	,"TheID_ESTADO"."ESTADO" "TheidEstadoestado"
+	,"LICENCIAS"."FECHA_VENCIMIENTO" "FechaVencimiento"
+	,"LICENCIAS"."DESCRIPTOR_LICENCIA" "DescriptorLicencia"
+	,"LICENCIAS"."USUARIO_CREA" "UsuarioCrea"
+	,"LICENCIAS"."FECHA_CREA" "FechaCrea"
+	,"LICENCIAS"."USUARIO_ACTUALIZA" "UsuarioActualiza"
+	,"LICENCIAS"."FECHA_ACTUALIZA" "FechaActualiza"
+	,"LICENCIAS"."DIASXVENCER" "Diasxvencer"
+from "dbo"."LICENCIAS" "LICENCIAS"
+	left join "dbo"."ESTADOS" "TheID_ESTADO" on "LICENCIAS"."ID_ESTADO" = "TheID_ESTADO"."ID_ESTADO"
+	left join "dbo"."TIPO_LICENCIA" "TIPO_LICENCIA" on "LICENCIAS"."ID_TIPO_LICENCIA" = "TIPO_LICENCIA"."ID_TIPO_LICENCIA"
+	left join "dbo"."PROVEEDORR" "PROVEEDORR" on "LICENCIAS"."ID_PROVEEDOR" = "PROVEEDORR"."ID_PROVEEDOR"]]></text>
+    </command>
+    <command id="ID_LICENCIAIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="IDLicencia" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="IDLicencia" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Licencia" readOnly="true" causesCalculate="true" />
+    <field name="NoLicencia" type="String" label="No Licencia" length="50" showInSummary="true" />
+    <field name="IDTipoLicencia" type="Int32" allowNulls="false" label="Id Tipo Licencia" showInSummary="true">
+      <items style="Lookup" dataController="TipoLicencia" newDataView="createForm1" dataValueField="IDTipoLicencia" dataTextField="Descripcion" />
+    </field>
+    <field name="TipoLicenciaDescripcion" type="String" readOnly="true" label="Tipo Licencia" length="30" />
+    <field name="IDProveedor" type="Int32" allowNulls="false" label="Id Proveedor" showInSummary="true">
+      <items style="Lookup" dataController="Proveedorr" newDataView="createForm1" dataValueField="IDProveedor" dataTextField="NombreComercial" />
+    </field>
+    <field name="ProveedorrNombreComercial" type="String" readOnly="true" label="Proveedor" length="300" />
+    <field name="IDEstado" type="Int32" allowNulls="false" label="Id Estado" showInSummary="true">
+      <items style="DropDownList" dataController="Estados" dataValueField="IDEstado" dataTextField="Estado" newDataView="createForm1" />
+    </field>
+    <field name="TheidEstadoestado" type="String" readOnly="true" label="Estado" length="50" />
+    <field name="FechaVencimiento" type="Date" allowNulls="false" dataFormatString="g" label="Fecha Vencimiento" showInSummary="true" causesCalculate="true" />
+    <field name="DescriptorLicencia" type="String" label="Descriptor Licencia" length="150" />
+    <field name="UsuarioCrea" type="String" label="Usuario Crea" length="20" />
+    <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
+    <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" />
+    <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+    <field name="Diasxvencer" type="Int32" label="Licencia vence en" calculated="true" causesCalculate="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Licencias" filter="IDTipoLicencia&lt;&gt;1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="NoLicencia" columns="50" />
+        <dataField fieldName="IDTipoLicencia" aliasFieldName="TipoLicenciaDescripcion" />
+        <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
+        <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+        <dataField fieldName="FechaVencimiento" columns="20" />
+        <dataField fieldName="Diasxvencer" columns="15" />
+        <dataField fieldName="DescriptorLicencia" />
+        <dataField fieldName="UsuarioCrea" columns="20" />
+        <dataField fieldName="FechaCrea" columns="20" />
+        <dataField fieldName="UsuarioActualiza" columns="20" />
+        <dataField fieldName="FechaActualiza" columns="20" />
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="AMARILLO1" test="[Diasxvencer]&gt;=45" />
+        <expression type="ClientScript" result="NARANJA1" test="[Diasxvencer]&gt;=25 &amp;&amp; [Diasxvencer]&lt;=44" />
+        <expression type="ClientScript" result="ROJO1" test="[Diasxvencer]&lt;=24" />
+      </styles>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Licencias">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Licencias" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NoLicencia" columns="50" />
+            <dataField fieldName="IDTipoLicencia" aliasFieldName="TipoLicenciaDescripcion" />
+            <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
+            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+            <dataField fieldName="FechaVencimiento" columns="20" />
+            <dataField fieldName="DescriptorLicencia" />
+            <dataField fieldName="UsuarioCrea" columns="20" />
+            <dataField fieldName="FechaCrea" columns="20" />
+            <dataField fieldName="UsuarioActualiza" columns="20" />
+            <dataField fieldName="FechaActualiza" columns="20" />
+            <dataField fieldName="Diasxvencer" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Licencias">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" wrap="true" collapsed="true" floating="true" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="NoLicencia" columns="50" />
+            <dataField fieldName="IDTipoLicencia" aliasFieldName="TipoLicenciaDescripcion" />
+            <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
+            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+            <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
+            <dataField fieldName="DescriptorLicencia" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="BITACORA" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Diasxvencer" columns="15" />
+            <dataField fieldName="UsuarioCrea" columns="20" />
+            <dataField fieldName="FechaCrea" columns="20" />
+            <dataField fieldName="UsuarioActualiza" columns="20" />
+            <dataField fieldName="FechaActualiza" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IDEstado= 3
+SET @TheidEstadoestado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)]]></rule>
+    <rule id="r101" commandName="Calculate" type="Sql" phase="Execute" name="Calculate DiasxVencer"><![CDATA[/*DECLARE @ID_LICENCIA AS INT
+*/
+SET @Diasxvencer = (DATEDIFF(day, GETDATE(), @FechaVencimiento))
+
+]]></rule>
+  </businessRules>
+</dataController>

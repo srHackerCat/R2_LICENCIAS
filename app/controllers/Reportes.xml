@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Reportes" conflictDetection="overwriteChanges" text="REPORTERIA" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <actions>
+    <actionGroup id="ag100" scope="Form" headerText="frm" flat="false">
+      <action commandName="SQL" headerText="GENERAR INFORME" id="a100" whenLastCommandName="Edit">
+        <data><![CDATA[DECLARE @DiasVence AS nvarchar(10)
+
+set @DiasVence=Convert(varchar(10),@ID_DIAS)
+set @Result_NavigateUrl='_blank:https://localhost:44305/VisorLicenciaPa?psLicencia='+@DiasVence+''
+set @Result_Continue = 1]]></data>
+      </action>
+      <action commandName="Edit" headerText="INGRESAR PARAMETROS" id="a101" />
+    </actionGroup>
+  </actions>
+  <views>
+    <view id="FORM" type="Form" label="INFORME DE LICENCIAS">
+      <headerText />
+      <categories>
+        <category headerText="REPORTE DIA" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="ID_DIAS" columns="15" textMode="Text" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <fields>
+    <field name="ID_DIAS" type="Int32" label="Ingrese cantidad de dias" isVirtual="true" />
+  </fields>
+</dataController>

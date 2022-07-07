@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="LICENCIAS" alias="LICENCIAS" created="2022-06-27T11:35:41" modified="2022-07-06T16:08:01" x="20" y="39" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TheID_ESTADO" parentTableSchema="dbo" parentTableName="ESTADOS" x="412" y="425">
+      <foreignKeyColumn columnName="ID_ESTADO" parentColumnName="ID_ESTADO" />
+    </foreignKey>
+    <foreignKey id="TIPO_LICENCIA" parentTableSchema="dbo" parentTableName="TIPO_LICENCIA" x="405" y="20">
+      <foreignKeyColumn columnName="ID_TIPO_LICENCIA" parentColumnName="ID_TIPO_LICENCIA" />
+    </foreignKey>
+    <foreignKey id="PROVEEDORR" parentTableSchema="dbo" parentTableName="PROVEEDORR" x="397" y="158">
+      <foreignKeyColumn columnName="ID_PROVEEDOR" parentColumnName="ID_PROVEEDOR" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ID_LICENCIA" fieldName="IDLicencia" label="Id Licencia" />
+    <column name="NO_LICENCIA" fieldName="NoLicencia" label="No Licencia" />
+    <column name="ID_TIPO_LICENCIA" fieldName="IDTipoLicencia" label="Id Tipo Licencia" aliasColumnName="DESCRIPCION" aliasForeignKey="TIPO_LICENCIA" />
+    <column name="DESCRIPCION" fieldName="TipoLicenciaDescripcion" label="Tipo Licencia Descripcion" foreignKey="TIPO_LICENCIA" />
+    <column name="ID_PROVEEDOR" fieldName="IDProveedor" label="Id Proveedor" aliasColumnName="NOMBRE_COMERCIAL" aliasForeignKey="PROVEEDORR" />
+    <column name="NOMBRE_COMERCIAL" fieldName="ProveedorrNombreComercial" label="Proveedorr Nombre Comercial" foreignKey="PROVEEDORR" />
+    <column name="ID_ESTADO" fieldName="IDEstado" label="Id Estado" aliasColumnName="ESTADO" aliasForeignKey="TheID_ESTADO" />
+    <column name="ESTADO" fieldName="TheidEstadoestado" label="IDESTADO Estado" foreignKey="TheID_ESTADO" />
+    <column name="FECHA_VENCIMIENTO" fieldName="FechaVencimiento" label="Fecha Vencimiento" format="g" />
+    <column name="DESCRIPTOR_LICENCIA" fieldName="DescriptorLicencia" label="Descriptor Licencia" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+    <column name="DIASXVENCER" fieldName="Diasxvencer" label="Diasxvencer" />
+  </columns>
+</dataModel>

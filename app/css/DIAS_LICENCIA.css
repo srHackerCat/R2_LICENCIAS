@@ -1,0 +1,14 @@
+﻿.AMARILLO1 {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(238,211,57,0.9054972330729166) 0%, rgba(255,200,0,1) 100%);
+}
+
+.ROJO1 {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(219,61,25,0.938813025210084) 0%);
+}
+
+.NARANJA1 {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(228,114,43,0.938813025210084) 0%);
+}

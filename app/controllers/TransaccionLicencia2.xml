@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TransaccionLicencia2" label="TransaccionLicencia2" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" custom="false">
+      <text><![CDATA[select
+	"TRANSACCION_LICENCIA"."ID_TRANSACCION" "IDTransaccion"
+	,"TRANSACCION_LICENCIA"."ID_TIPO_TRANSACCION" "IDTipoTransaccion"
+	,"TheID_TIPO_TRANSACCION"."DESCRIPCION" "TheidTipoTransacciondescripcion"
+	,"TRANSACCION_LICENCIA"."ID_LICENCIA" "IDLicencia"
+	,"LICENCIAS"."NO_LICENCIA" "LicenciasNOLicencia"
+	,"TRANSACCION_LICENCIA"."ID_TIPO_PAGO" "IDTipoPago"
+	,"TheID_TIPO_PAGO"."DESCRIPCION" "TheidTipoPagodescripcion"
+	,"TRANSACCION_LICENCIA"."MONTO_ML" "MontoMl"
+	,"TRANSACCION_LICENCIA"."FECHA_TRANSACCION" "FechaTransaccion"
+	,"TRANSACCION_LICENCIA"."NO_DOCUMENTO" "NoDocumento"
+	,"TRANSACCION_LICENCIA"."COMPROBANTE" "Comprobante"
+	,"TRANSACCION_LICENCIA"."USUARIO_CREA" "UsuarioCrea"
+	,"TRANSACCION_LICENCIA"."FECHA_CREA" "FechaCrea"
+	,"TRANSACCION_LICENCIA"."USUARIO_ACTUALIZA" "UsuarioActualiza"
+	,"TRANSACCION_LICENCIA"."FECHA_ACTUALIZA" "FechaActualiza"
+from "dbo"."TRANSACCION_LICENCIA" "TRANSACCION_LICENCIA"
+	left join "dbo"."TIPO_TRANSACCION" "TheID_TIPO_TRANSACCION" on "TRANSACCION_LICENCIA"."ID_TIPO_TRANSACCION" = "TheID_TIPO_TRANSACCION"."ID_TIPO_TRANSACCION"
+	left join "dbo"."TIPO_PAGO" "TheID_TIPO_PAGO" on "TRANSACCION_LICENCIA"."ID_TIPO_PAGO" = "TheID_TIPO_PAGO"."ID_TIPO_PAGO"
+	left join "dbo"."LICENCIAS" "LICENCIAS" on "TRANSACCION_LICENCIA"."ID_LICENCIA" = "LICENCIAS"."ID_LICENCIA"]]></text>
+    </command>
+    <command id="ID_TRANSACCIONIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="IDTransaccion" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="IDTransaccion" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Transaccion" readOnly="true" />
+    <field name="IDTipoTransaccion" type="Int32" allowNulls="false" label="Id Tipo Transaccion" showInSummary="true">
+      <items style="RadioButtonList" dataController="TipoTransaccion" dataValueField="IDTipoTransaccion" dataTextField="Descripcion" />
+    </field>
+    <field name="TheidTipoTransacciondescripcion" type="String" readOnly="true" label="Tipo de Transaccion" length="50" />
+    <field name="IDLicencia" type="Int32" allowNulls="false" label="Id Licencia" showInSummary="true">
+      <items />
+    </field>
+    <field name="LicenciasNOLicencia" type="String" readOnly="true" label="Licencias NO Licencia" length="50" />
+    <field name="IDTipoPago" type="Int32" allowNulls="false" label="Id Tipo Pago" showInSummary="true">
+      <items style="RadioButtonList" dataController="TipoPago" dataValueField="IDTipoPago" dataTextField="Descripcion" />
+    </field>
+    <field name="TheidTipoPagodescripcion" type="String" readOnly="true" label="Tipo de Pago" length="50" />
+    <field name="MontoMl" type="Decimal" allowNulls="false" label="Monto" showInSummary="true" />
+    <field name="FechaTransaccion" type="DateTime" allowNulls="false" label="Fecha Transaccion" showInSummary="true" />
+    <field name="NoDocumento" type="String" allowNulls="false" label="No Documento" length="50" />
+    <field name="Comprobante" type="Byte[]" onDemand="true" sourceFields="IDTransaccion" onDemandHandler="TRANSACCION_LICENCIAComprobante" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Comprobante" />
+    <field name="UsuarioCrea" type="String" label="Usuario Crea" length="20" />
+    <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
+    <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" />
+    <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+    <field name="IDEntrega" type="Int32" label="ID Entrega">
+      <items style="Lookup" dataController="EntregaDeposito" newDataView="createForm1" dataValueField="IDEntrega" dataTextField="NombreColaborador" copy="EntregaDepositoFechaEntrega=FechaEntrega" />
+    </field>
+    <field name="EntregaDepositoNombreColaborador" type="String" readOnly="true" label="Entrega Deposito Nombre Colaborador" length="50" />
+    <field name="EntregaDepositoFechaEntrega" type="DateTime" readOnly="true" dataFormatString="g" label="Entrega Deposito Fecha Entrega" />
+    <field name="IDOcupacion" type="Int32" label="ID Ocupacion">
+      <items style="Lookup" dataController="PermisoOcupacion" newDataView="createForm1" dataValueField="IDOcupacion" dataTextField="Ocupacion" copy="PermisoOcupacionAo=AO, PermisoOcupacionObservacion=Observacion" />
+    </field>
+    <field name="PermisoOcupacion" type="String" readOnly="true" label="Permiso Ocupacion" length="50" />
+    <field name="PermisoOcupacionAo" type="String" readOnly="true" label="Permiso Ocupacion Año" length="4" />
+    <field name="PermisoOcupacionObservacion" type="String" readOnly="true" label="Permiso Ocupacion Observacion" length="150" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Transaccion Licencia">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="IDEntrega" aliasFieldName="EntregaDepositoNombreColaborador" />
+        <dataField fieldName="EntregaDepositoFechaEntrega" columns="20" />
+        <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
+        <dataField fieldName="PermisoOcupacionAo" columns="4" />
+        <dataField fieldName="PermisoOcupacionObservacion" />
+        <dataField fieldName="IDTipoTransaccion" aliasFieldName="TheidTipoTransacciondescripcion" />
+        <dataField fieldName="IDLicencia" aliasFieldName="LicenciasNOLicencia" />
+        <dataField fieldName="IDTipoPago" aliasFieldName="TheidTipoPagodescripcion" />
+        <dataField fieldName="MontoMl" columns="15" />
+        <dataField fieldName="FechaTransaccion" columns="10" />
+        <dataField fieldName="NoDocumento" columns="50" />
+        <dataField fieldName="Comprobante" columns="15" />
+        <dataField fieldName="UsuarioCrea" columns="20" />
+        <dataField fieldName="FechaCrea" columns="20" />
+        <dataField fieldName="UsuarioActualiza" columns="20" />
+        <dataField fieldName="FechaActualiza" columns="20" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Transaccion Licencia">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="IDTipoTransaccion" aliasFieldName="TheidTipoTransacciondescripcion" />
+            <dataField fieldName="IDLicencia" aliasFieldName="LicenciasNOLicencia" />
+            <dataField fieldName="IDTipoPago" aliasFieldName="TheidTipoPagodescripcion" />
+            <dataField fieldName="MontoMl" columns="15" />
+            <dataField fieldName="FechaTransaccion" columns="10" />
+            <dataField fieldName="NoDocumento" columns="50" />
+            <dataField fieldName="Comprobante" columns="15" />
+            <dataField fieldName="IDEntrega" aliasFieldName="EntregaDepositoNombreColaborador" />
+            <dataField fieldName="EntregaDepositoFechaEntrega" columns="20" />
+            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
+            <dataField fieldName="PermisoOcupacionAo" columns="4" />
+            <dataField fieldName="PermisoOcupacionObservacion" />
+          </dataFields>
+        </category>
+        <category headerText="BITACORA" id="c2">
+          <dataFields>
+            <dataField fieldName="UsuarioCrea" columns="20" />
+            <dataField fieldName="FechaCrea" columns="20" />
+            <dataField fieldName="UsuarioActualiza" columns="20" />
+            <dataField fieldName="FechaActualiza" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Transaccion Licencia">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" wrap="true" collapsed="true" floating="true" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="IDTipoTransaccion" aliasFieldName="TheidTipoTransacciondescripcion" />
+            <dataField fieldName="IDLicencia" aliasFieldName="LicenciasNOLicencia" />
+            <dataField fieldName="IDTipoPago" aliasFieldName="TheidTipoPagodescripcion" />
+            <dataField fieldName="MontoMl" columns="15" />
+            <dataField fieldName="FechaTransaccion" columns="10" />
+            <dataField fieldName="NoDocumento" columns="50" />
+            <dataField fieldName="Comprobante" columns="15" />
+            <dataField fieldName="IDEntrega" aliasFieldName="EntregaDepositoNombreColaborador">
+              <visibility>
+                <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="EntregaDepositoFechaEntrega" columns="20" />
+            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
+            <dataField fieldName="PermisoOcupacionAo" columns="4" />
+            <dataField fieldName="PermisoOcupacionObservacion" />
+          </dataFields>
+        </category>
+        <category headerText="BITACORA" id="c2">
+          <dataFields>
+            <dataField fieldName="UsuarioCrea" columns="20" />
+            <dataField fieldName="FechaCrea" columns="20" />
+            <dataField fieldName="UsuarioActualiza" columns="20" />
+            <dataField fieldName="FechaActualiza" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules />
+</dataController>

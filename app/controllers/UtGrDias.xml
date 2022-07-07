@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="UtGrDias" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="ID_DIAS" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="ID DIAS" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" label="DIA" />
+  </views>
+</dataController>

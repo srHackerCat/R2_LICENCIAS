@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PROVEEDORR" alias="PROVEEDORR" created="2022-06-27T15:49:32" modified="2022-06-27T15:49:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ID_PROVEEDOR" fieldName="IDProveedor" label="Id Proveedor" />
+    <column name="CODIGO_PROVEEDOR" fieldName="CodigoProveedor" label="Codigo Proveedor" />
+    <column name="NOMBRE_COMERCIAL" fieldName="NombreComercial" label="Nombre Comercial" />
+    <column name="RAZON_SOCIAL" fieldName="RazonSocial" label="Razon Social" />
+    <column name="NIT" fieldName="Nit" label="Nit" />
+    <column name="DIRECCION" fieldName="Direccion" label="Direccion" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+  </columns>
+</dataModel>

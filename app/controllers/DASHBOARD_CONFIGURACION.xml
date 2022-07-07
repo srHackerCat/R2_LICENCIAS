@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DASHBOARD_CONFIGURACION" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Proyecto" type="DataView" label="Proyecto">
+      <dataView controller="Proyecto" view="grid1" />
+    </field>
+    <field name="Ubicaciones" type="DataView" label="Ubicaciones">
+      <dataView controller="Ubicaciones" view="grid1" filterSource="Proyecto" filterFields="IDProyecto" />
+    </field>
+    <field name="TipoPago" type="DataView" label="Tipo Pago">
+      <dataView controller="TipoPago" view="grid1" />
+    </field>
+    <field name="EmailAviso" type="DataView" label="Email Aviso">
+      <dataView controller="EmailAviso" view="grid1" filterSource="TipoLicencia" filterFields="IDTipoLicencia" />
+    </field>
+    <field name="Estados" type="DataView" label="Estados">
+      <dataView controller="Estados" view="grid1" />
+    </field>
+    <field name="TipoTransaccion" type="DataView" label="Tipo Transaccion">
+      <dataView controller="TipoTransaccion" view="grid1" />
+    </field>
+    <field name="TipoLicencia" type="DataView" label="Tipo Licencia">
+      <dataView controller="TipoLicencia" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="FORM1" type="Form" label="FORMULARIOS">
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Proyecto" columns="15" />
+            <dataField fieldName="Ubicaciones" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c4" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="TipoPago" columns="15" />
+            <dataField fieldName="TipoTransaccion" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="TipoLicencia" columns="15" />
+            <dataField fieldName="EmailAviso" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Estados" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

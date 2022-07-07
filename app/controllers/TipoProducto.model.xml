@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TIPO_PRODUCTO" alias="TIPO_PRODUCTO" created="2022-02-22T10:33:19" modified="2022-02-22T10:33:20" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ID_TIPO_PRODUCTO" fieldName="IDTipoProducto" label="Id Tipo Producto" />
+    <column name="DESCRIPCION" fieldName="Descripcion" label="Descripcion" />
+    <column name="COMENTARIOS" fieldName="Comentarios" label="Comentarios" />
+    <column name="ESTADO" fieldName="Estado" label="Estado" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="FECHA_EXPIRA" fieldName="FechaExpira" label="Fecha Expira" format="g" />
+  </columns>
+</dataModel>

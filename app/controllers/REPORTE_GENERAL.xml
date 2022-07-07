@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="REPORTE_GENERAL" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="idTIPO_LICENCIA" type="Int32" label="TIPO LICENCIA">
+      <items style="DropDownList" dataController="TipoLicencia" dataView="grid1" dataTextField="Descripcion" dataValueField="IDTipoLicencia" />
+    </field>
+  </fields>
+  <views>
+    <view id="Form1" type="Form" label="Generar Reporte">
+      <categories>
+        <category headerText="Reporte General Licencias" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="idTIPO_LICENCIA" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="Form" headerText="Generar Reporte" flat="false">
+      <action commandName="Custom" headerText="GENERAR REPORTE" whenLastCommandName="Edit" id="a100" commandArgument="SpGenerarInforme">
+        <data />
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="SpGenerarInforme" type="Sql" phase="Execute"><![CDATA[DECLARE @TIPO_LICENCIA AS NVARCHAR(10)
+SET @TIPO_LICENCIA = @idTIPO_LICENCIA
+
+
+if @TIPO_LICENCIA is null
+begin
+	set @TIPO_LICENCIA = 0
+end
+
+set @Result_NavigateUrl = '_blank:http://168.234.51.189:8036/VisorLicencias?ID_TIPO_LICENCIA=' +@TIPO_LICENCIA ]]></rule>
+  </businessRules>
+</dataController>

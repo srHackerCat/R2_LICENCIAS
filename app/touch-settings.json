@@ -1,0 +1,14 @@
+﻿{
+  "appName": "Licencias IT",
+  "splash": {
+    "enabled": true,
+    "logo": "/images/RosulLogo.png",
+    "background": "/images/Fondo.jpg",
+    "duration": 2500
+  },
+  "settings": {
+    "options": {
+      "theme": false
+    }
+  }
+}
