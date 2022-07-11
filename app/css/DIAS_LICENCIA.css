@@ -12,3 +12,8 @@
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(228,114,43,0.938813025210084) 0%);
 }
+
+.VERDE {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(126,217,87,1) 0%);
+}

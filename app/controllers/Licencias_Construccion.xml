@@ -77,6 +77,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
         <expression type="ClientScript" result="AMARILLO1" test="[DiasFaltantes]&gt;=45" />
         <expression type="ClientScript" result="NARANJA1" test="[DiasFaltantes]&gt;=25 &amp;&amp; [DiasFaltantes]&lt;=44" />
         <expression type="ClientScript" result="ROJO1" test="[DiasFaltantes]&lt;=24" />
+        <expression type="ClientScript" result="VERDE" test="[IDEstado]==4" />
       </styles>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Licencias">
@@ -192,6 +193,8 @@ SET @TheidEstadoestado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)
 SET @IDTipoLicencia = 1
 set @TipoLicenciaDescripcion = (SELECT DESCRIPCION FROM TIPO_LICENCIA WHERE ID_TIPO_LICENCIA = @IDTipoLicencia)]]></rule>
     <rule id="r101" commandName="Select" type="Sql" phase="Execute" name="Calculate DiasxVencer" view="grid1"><![CDATA[SET @DiasFaltantes = (DATEDIFF(day, getdate(), @FechaVencimiento))
+
+
 /*
 
 DECLARE @FECHA_VENCE AS DATE

@@ -276,5 +276,17 @@ from "dbo"."TRANSACCION" "TRANSACCION"
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IDEstado= 1
 SET @EstadosEstado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)]]></rule>
+    <rule id="r101" commandName="Insert" type="Sql" phase="After"><![CDATA[DECLARE @TIPO_TRANSACCION AS INT
+
+SET @TIPO_TRANSACCION=(SELECT TOP 1 ID_TIPO_TRANSACCION FROM TIPO_TRANSACCION WHERE DESCRIPCION ='REEMBOLSO')
+
+IF @IDTipoTransaccion=@TIPO_TRANSACCION
+BEGIN
+PRINT 'ACTUALIZAR ENCABEZADO'
+UPDATE LICENCIAS SET ID_ESTADO=4 WHERE ID_LICENCIA=@IDLicencia
+END
+
+
+]]></rule>
   </businessRules>
 </dataController>
