@@ -51,7 +51,10 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
     <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" />
     <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
-    <field name="Diasxvencer" type="Int32" label="Licencia vence en" calculated="true" causesCalculate="true" />
+    <field name="FechaVigencia" type="DateTime" allowNulls="false" dataFormatString="g" label="Fecha Vigencia" />
+    <field name="DiasFaltantes" type="Int32" label="Dias Faltantes" calculated="true" causesCalculate="true" isVirtual="true">
+      <formula />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Licencias" filter="IDTipoLicencia&lt;&gt;1">
@@ -61,8 +64,9 @@ from "dbo"."LICENCIAS" "LICENCIAS"
         <dataField fieldName="IDTipoLicencia" aliasFieldName="TipoLicenciaDescripcion" />
         <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
         <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+        <dataField fieldName="FechaVigencia" columns="20" />
         <dataField fieldName="FechaVencimiento" columns="20" />
-        <dataField fieldName="Diasxvencer" columns="15" />
+        <dataField fieldName="DiasFaltantes" columns="15" />
         <dataField fieldName="DescriptorLicencia" />
         <dataField fieldName="UsuarioCrea" columns="20" />
         <dataField fieldName="FechaCrea" columns="20" />
@@ -85,13 +89,13 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="IDTipoLicencia" aliasFieldName="TipoLicenciaDescripcion" />
             <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
             <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+            <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" />
             <dataField fieldName="DescriptorLicencia" />
             <dataField fieldName="UsuarioCrea" columns="20" />
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />
             <dataField fieldName="FechaActualiza" columns="20" />
-            <dataField fieldName="Diasxvencer" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -106,13 +110,13 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="IDTipoLicencia" aliasFieldName="TipoLicenciaDescripcion" />
             <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
             <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+            <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
             <dataField fieldName="DescriptorLicencia" />
           </dataFields>
         </category>
         <category id="c2" headerText="BITACORA" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Diasxvencer" columns="15" />
             <dataField fieldName="UsuarioCrea" columns="20" />
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />
@@ -184,10 +188,12 @@ from "dbo"."LICENCIAS" "LICENCIAS"
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IDEstado= 3
 SET @TheidEstadoestado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)]]></rule>
-    <rule id="r101" commandName="Calculate" type="Sql" phase="Execute" name="Calculate DiasxVencer"><![CDATA[/*DECLARE @ID_LICENCIA AS INT
-*/
-SET @Diasxvencer = (DATEDIFF(day, GETDATE(), @FechaVencimiento))
+    <rule id="r101" commandName="Select" type="Sql" phase="Execute" name="Calculate DiasxVencer" view="grid1"><![CDATA[SET @DiasFaltantes = (DATEDIFF(day, getdate(), @FechaVencimiento))
+/*
 
-]]></rule>
+DECLARE @FECHA_VENCE AS DATE
+SET @FECHA_VENCE = (SELECT FECHA_VENCIMIENTO FROM LICENCIAS WHERE ID_LICENCIA = @IDLicencia)
+SET @Diasxvencer = (DATEDIFF(day, GETDATE(), @FECHA_VENCE))
+*/]]></rule>
   </businessRules>
 </dataController>

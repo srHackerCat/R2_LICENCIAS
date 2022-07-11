@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="EMAIL_AVISO" alias="EMAIL_AVISO" created="2022-06-23T10:45:34" modified="2022-07-06T15:58:43" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="EMAIL_AVISO" alias="EMAIL_AVISO" created="2022-06-23T10:45:34" modified="2022-07-08T08:43:54" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="TIPO_LICENCIA" parentTableSchema="dbo" parentTableName="TIPO_LICENCIA" x="356" y="50">
       <foreignKeyColumn columnName="ID_TIPO_LICENCIA" parentColumnName="ID_TIPO_LICENCIA" />

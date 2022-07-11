@@ -5,7 +5,7 @@
       <categories>
         <category headerText="Licencias" id="c1" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Licencias" columns="15" />
+            <dataField fieldName="Licencias_IT" columns="15" />
           </dataFields>
         </category>
         <category headerText="Detalle Transaccion Licencia" id="c2" flow="NewRow">
@@ -17,11 +17,11 @@
     </view>
   </views>
   <fields>
-    <field name="Licencias" type="DataView" label="Licencias">
-      <dataView controller="Licencias" view="grid1" />
+    <field name="Licencias_IT" type="DataView" label="Licencias IT">
+      <dataView controller="Licencias_IT" view="grid1" />
     </field>
     <field name="Transaccion" type="DataView" label="Transaccion">
-      <dataView controller="Transaccion" view="grid1" filterSource="Licencias" filterFields="IDLicencia" />
+      <dataView controller="Transaccion" view="grid1" filterSource="Licencias_IT" filterFields="IDLicencia" />
     </field>
   </fields>
 </dataController>

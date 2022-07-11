@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="LICENCIAS" alias="LICENCIAS" created="2022-06-27T11:35:41" modified="2022-07-06T16:08:01" x="20" y="39" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="LICENCIAS" alias="LICENCIAS" created="2022-06-27T11:35:41" modified="2022-07-08T12:46:46" x="20" y="39" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
-    <foreignKey id="TheID_ESTADO" parentTableSchema="dbo" parentTableName="ESTADOS" x="412" y="425">
+    <foreignKey id="TheID_ESTADO" parentTableSchema="dbo" parentTableName="ESTADOS" x="423" y="295">
       <foreignKeyColumn columnName="ID_ESTADO" parentColumnName="ID_ESTADO" />
     </foreignKey>
     <foreignKey id="TIPO_LICENCIA" parentTableSchema="dbo" parentTableName="TIPO_LICENCIA" x="405" y="20">
@@ -26,6 +26,6 @@
     <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
     <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
     <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
-    <column name="DIASXVENCER" fieldName="Diasxvencer" label="Diasxvencer" />
+    <column name="FECHA_VIGENCIA" fieldName="FechaVigencia" label="Fecha Vigencia" format="g" />
   </columns>
 </dataModel>

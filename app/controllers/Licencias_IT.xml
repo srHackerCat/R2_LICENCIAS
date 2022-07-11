@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Licencias_Construccion" label="Licencias_Construccion" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Licencias_IT" label="Licencias_IT" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" custom="false">
       <text><![CDATA[select
@@ -34,7 +34,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     <field name="IDLicencia" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Licencia" readOnly="true" causesCalculate="true" />
     <field name="NoLicencia" type="String" label="No Licencia" length="50" showInSummary="true" />
     <field name="IDTipoLicencia" type="Int32" allowNulls="false" label="Id Tipo Licencia" showInSummary="true">
-      <items style="Lookup" dataController="TipoLicencia" newDataView="createForm1" dataValueField="IDTipoLicencia" dataTextField="Descripcion" />
+      <items style="DropDownList" dataController="TipoLicencia" newDataView="createForm1" dataValueField="IDTipoLicencia" dataTextField="Descripcion" />
     </field>
     <field name="TipoLicenciaDescripcion" type="String" readOnly="true" label="Tipo Licencia" length="30" />
     <field name="IDProveedor" type="Int32" allowNulls="false" label="Id Proveedor" showInSummary="true">
@@ -57,7 +57,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Licencias" filter="IDTipoLicencia=1">
+    <view id="grid1" type="Grid" commandId="command1" label="Licencias" filter="IDTipoLicencia&lt;&gt;1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="NoLicencia" columns="50" />
@@ -188,9 +188,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IDEstado= 3
 SET @TheidEstadoestado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)
-
-SET @IDTipoLicencia = 1
-set @TipoLicenciaDescripcion = (SELECT DESCRIPCION FROM TIPO_LICENCIA WHERE ID_TIPO_LICENCIA = @IDTipoLicencia)]]></rule>
+]]></rule>
     <rule id="r101" commandName="Select" type="Sql" phase="Execute" name="Calculate DiasxVencer" view="grid1"><![CDATA[SET @DiasFaltantes = (DATEDIFF(day, getdate(), @FechaVencimiento))
 /*
 

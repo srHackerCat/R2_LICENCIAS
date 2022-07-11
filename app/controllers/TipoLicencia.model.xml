@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="TIPO_LICENCIA" alias="TIPO_LICENCIA" created="2022-02-22T10:33:15" modified="2022-07-06T16:02:03" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="TIPO_LICENCIA" alias="TIPO_LICENCIA" created="2022-02-22T10:33:15" modified="2022-07-08T08:43:58" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="DESCRIPCION" fieldName="Descripcion" label="Descripcion" />

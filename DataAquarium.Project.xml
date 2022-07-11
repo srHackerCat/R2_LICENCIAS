@@ -2,7 +2,7 @@
   This file is provided to store the settings for your Data Aquarium project. 
   You can safely delete this file if no further code generation is planned.
 -->
-<project compatibility="20111118" dataModel="required" appFolder="app" displayName="Licencia IT R" group="" type="Web Site Factory" sourceControl="git" subscriptionLevel="Unlimited" name="Licencia_IT_R" prettyName="Licencia IT R" appGenVersion="8.9.24.0" codeDomProvider="CSharp" targetFramework="4.8" userInterface="TouchUI" pageImplementation="html" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
+<project compatibility="20111118" dataModel="required" appFolder="app" displayName="Licencia IT R" group="" type="Web Site Factory" sourceControl="git" subscriptionLevel="Unlimited" name="R2_LICENCIAS" prettyName="R2 LICENCIAS" appGenVersion="8.9.24.0" codeDomProvider="CSharp" targetFramework="4.8" userInterface="TouchUI" pageImplementation="html" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
   <connectionString hostDatabaseSharing="false" sessionStateMode="None">Data Source=10.102.1.238;Initial Catalog=Licenciamiento;Persist Security Info=True;User ID=sap;Password=12345678;</connectionString>
   <providerName>System.Data.SqlClient</providerName>
   <namespace>MyCompany</namespace>
