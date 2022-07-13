@@ -191,6 +191,12 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action commandName="SQL" headerText="MARCAR COMPLETADA" cssClass="material-icon-check_circle" whenKeySelected="true" id="a100">
+        <data><![CDATA[UPDATE LICENCIAS SET ID_ESTADO = 4 WHERE ID_LICENCIA = @IDLicencia]]></data>
+      </action>
+      <action commandName="SQL" headerText="ENVIAR ALERTA" cssClass="material-icon-send" whenKeySelected="true" id="a101">
+        <data><![CDATA[EXEC [dbo].[ENVIO_CORREO_ALERTA_VENCIMIENTO]@IDLicencia]]></data>
+      </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
