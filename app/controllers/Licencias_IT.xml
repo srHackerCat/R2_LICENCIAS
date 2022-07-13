@@ -52,6 +52,14 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
     <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" />
     <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+    <field name="IDUbicacion" type="Int32" allowNulls="false" label="ID Ubicacion">
+      <items style="Lookup" dataController="Ubicaciones" newDataView="createForm1" dataValueField="IDUbicacion" dataTextField="Descripcion" />
+    </field>
+    <field name="UbicacionesDescripcion" type="String" readOnly="true" label="Ubicacion" length="50" />
+    <field name="IDOcupacion" type="Int32" allowNulls="false" label="ID Ocupacion">
+      <items style="Lookup" dataController="PermisoOcupacion" newDataView="createForm1" dataValueField="IDOcupacion" dataTextField="Ocupacion" />
+    </field>
+    <field name="PermisoOcupacion" type="String" readOnly="true" label="Permiso Ocupacion" length="50" />
     <field name="DiasFaltantes" type="Int32" label="Dias Faltantes" calculated="true" causesCalculate="true" isVirtual="true">
       <formula />
     </field>
@@ -72,6 +80,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
         <dataField fieldName="FechaCrea" columns="20" />
         <dataField fieldName="UsuarioActualiza" columns="20" />
         <dataField fieldName="FechaActualiza" columns="20" />
+        <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
       </dataFields>
       <styles>
         <expression type="ClientScript" result="AMARILLO1" test="[DiasFaltantes]&gt;=45" />
@@ -96,6 +105,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />
             <dataField fieldName="FechaActualiza" columns="20" />
+            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
           </dataFields>
         </category>
       </categories>
@@ -113,6 +123,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
             <dataField fieldName="DescriptorLicencia" />
+            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
           </dataFields>
         </category>
         <category id="c2" headerText="BITACORA" flow="NewColumn">

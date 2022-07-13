@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Transaccion_Construccion" label="Transaccion_Construccion" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Transaccion3" label="Transaccion3" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" custom="false">
       <text><![CDATA[select
 	"TRANSACCION"."ID_TRANSACCION" "IDTransaccion"
 	,"TRANSACCION"."ID_LICENCIA" "IDLicencia"
-	,"TheID_LICENCIA"."NO_LICENCIA" "TheidLicencianoLicencia"
-	,"TheID_LICENCIAID_PROVEEDOR"."NOMBRE_COMERCIAL" "TheidLicenciaidProveedornombreComercial"
-	,"TheID_LICENCIAID_TIPO_LICENCIA"."DESCRIPCION" "TheidLicenciaidTipoLicenciadescripcion"
+	,"LICENCIAS"."NO_LICENCIA" "LicenciasNOLicencia"
 	,"TRANSACCION"."ID_TIPO_TRANSACCION" "IDTipoTransaccion"
-	,"TheID_TIPO_TRANSACCION"."DESCRIPCION" "TheidTipoTransacciondescripcion"
+	,"TIPO_TRANSACCION"."DESCRIPCION" "TipoTransaccionDescripcion"
 	,"TRANSACCION"."ID_TIPO_PAGO" "IDTipoPago"
-	,"TheID_TIPO_PAGO"."DESCRIPCION" "TheidTipoPagodescripcion"
+	,"TIPO_PAGO"."DESCRIPCION" "TipoPagoDescripcion"
+	,"TRANSACCION"."ID_ESTADO" "IDEstado"
+	,"ESTADOS"."ESTADO" "EstadosEstado"
 	,"TRANSACCION"."MONTO_ML" "MontoMl"
 	,"TRANSACCION"."FECHA_TRANSACCION" "FechaTransaccion"
 	,"TRANSACCION"."NO_DOCUMENTO" "NoDocumento"
@@ -20,14 +20,10 @@
 	,"TRANSACCION"."FECHA_CREA" "FechaCrea"
 	,"TRANSACCION"."USUARIO_ACTUALIZA" "UsuarioActualiza"
 	,"TRANSACCION"."FECHA_ACTUALIZA" "FechaActualiza"
-	,"TRANSACCION"."ID_ESTADO" "IDEstado"
-	,"ESTADOS"."ESTADO" "EstadosEstado"
 from "dbo"."TRANSACCION" "TRANSACCION"
-	left join "dbo"."LICENCIAS" "TheID_LICENCIA" on "TRANSACCION"."ID_LICENCIA" = "TheID_LICENCIA"."ID_LICENCIA"
-	left join "dbo"."PROVEEDORR" "TheID_LICENCIAID_PROVEEDOR" on "TheID_LICENCIA"."ID_PROVEEDOR" = "TheID_LICENCIAID_PROVEEDOR"."ID_PROVEEDOR"
-	left join "dbo"."TIPO_LICENCIA" "TheID_LICENCIAID_TIPO_LICENCIA" on "TheID_LICENCIA"."ID_TIPO_LICENCIA" = "TheID_LICENCIAID_TIPO_LICENCIA"."ID_TIPO_LICENCIA"
-	left join "dbo"."TIPO_TRANSACCION" "TheID_TIPO_TRANSACCION" on "TRANSACCION"."ID_TIPO_TRANSACCION" = "TheID_TIPO_TRANSACCION"."ID_TIPO_TRANSACCION"
-	left join "dbo"."TIPO_PAGO" "TheID_TIPO_PAGO" on "TRANSACCION"."ID_TIPO_PAGO" = "TheID_TIPO_PAGO"."ID_TIPO_PAGO"
+	left join "dbo"."LICENCIAS" "LICENCIAS" on "TRANSACCION"."ID_LICENCIA" = "LICENCIAS"."ID_LICENCIA"
+	left join "dbo"."TIPO_TRANSACCION" "TIPO_TRANSACCION" on "TRANSACCION"."ID_TIPO_TRANSACCION" = "TIPO_TRANSACCION"."ID_TIPO_TRANSACCION"
+	left join "dbo"."TIPO_PAGO" "TIPO_PAGO" on "TRANSACCION"."ID_TIPO_PAGO" = "TIPO_PAGO"."ID_TIPO_PAGO"
 	left join "dbo"."ESTADOS" "ESTADOS" on "TRANSACCION"."ID_ESTADO" = "ESTADOS"."ID_ESTADO"]]></text>
     </command>
     <command id="ID_TRANSACCIONIdentityCommand" type="Text" event="Inserted">
@@ -108,7 +104,11 @@ from "dbo"."TRANSACCION" "TRANSACCION"
             </dataField>
           </dataFields>
         </category>
-        <category headerText="ESPECIFICACIONES" id="c3" wrap="true" floating="true" flow="NewColumn" />
+        <category headerText="ESPECIFICACIONES" id="c3" wrap="true" floating="true" flow="NewColumn">
+          <visibility>
+            <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+          </visibility>
+        </category>
         <category headerText="BITACORA" id="c2" wrap="true" floating="true">
           <dataFields>
             <dataField fieldName="UsuarioCrea" columns="20" />
@@ -215,17 +215,5 @@ from "dbo"."TRANSACCION" "TRANSACCION"
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IDEstado= 1
 SET @EstadosEstado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)]]></rule>
-    <rule id="r101" commandName="Insert" type="Sql" phase="After"><![CDATA[DECLARE @TIPO_TRANSACCION AS INT
-
-SET @TIPO_TRANSACCION=(SELECT TOP 1 ID_TIPO_TRANSACCION FROM TIPO_TRANSACCION WHERE DESCRIPCION ='REEMBOLSO')
-
-IF @IDTipoTransaccion=@TIPO_TRANSACCION
-BEGIN
-PRINT 'ACTUALIZAR ENCABEZADO'
-UPDATE LICENCIAS SET ID_ESTADO=4 WHERE ID_LICENCIA=@IDLicencia
-END
-
-
-]]></rule>
   </businessRules>
 </dataController>

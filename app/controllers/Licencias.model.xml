@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="LICENCIAS" alias="LICENCIAS" created="2022-06-27T11:35:41" modified="2022-07-08T12:46:46" x="20" y="39" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="LICENCIAS" alias="LICENCIAS" created="2022-06-27T11:35:41" modified="2022-07-13T11:40:23" x="20" y="39" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="TheID_ESTADO" parentTableSchema="dbo" parentTableName="ESTADOS" x="423" y="295">
       <foreignKeyColumn columnName="ID_ESTADO" parentColumnName="ID_ESTADO" />
@@ -7,8 +7,14 @@
     <foreignKey id="TIPO_LICENCIA" parentTableSchema="dbo" parentTableName="TIPO_LICENCIA" x="405" y="20">
       <foreignKeyColumn columnName="ID_TIPO_LICENCIA" parentColumnName="ID_TIPO_LICENCIA" />
     </foreignKey>
-    <foreignKey id="PROVEEDORR" parentTableSchema="dbo" parentTableName="PROVEEDORR" x="397" y="158">
+    <foreignKey id="PROVEEDORR" parentTableSchema="dbo" parentTableName="PROVEEDORR" x="1148" y="115">
       <foreignKeyColumn columnName="ID_PROVEEDOR" parentColumnName="ID_PROVEEDOR" />
+    </foreignKey>
+    <foreignKey id="Ubicaciones" parentTableSchema="dbo" parentTableName="Ubicaciones" x="802" y="34">
+      <foreignKeyColumn columnName="ID_UBICACION" parentColumnName="ID_UBICACION" />
+    </foreignKey>
+    <foreignKey id="PERMISO_OCUPACION" parentTableSchema="dbo" parentTableName="PERMISO_OCUPACION" x="799" y="267">
+      <foreignKeyColumn columnName="ID_OCUPACION" parentColumnName="ID_OCUPACION" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -27,5 +33,9 @@
     <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
     <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
     <column name="FECHA_VIGENCIA" fieldName="FechaVigencia" label="Fecha Vigencia" format="g" />
+    <column name="ID_UBICACION" fieldName="IDUbicacion" label="ID Ubicacion" aliasColumnName="DESCRIPCION" aliasForeignKey="Ubicaciones" />
+    <column name="DESCRIPCION" fieldName="UbicacionesDescripcion" label="Ubicaciones Descripcion" foreignKey="Ubicaciones" />
+    <column name="ID_OCUPACION" fieldName="IDOcupacion" label="ID Ocupacion" aliasColumnName="OCUPACION" aliasForeignKey="PERMISO_OCUPACION" />
+    <column name="OCUPACION" fieldName="PermisoOcupacion" label="Permiso Ocupacion" foreignKey="PERMISO_OCUPACION" />
   </columns>
 </dataModel>

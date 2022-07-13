@@ -10,7 +10,7 @@
         </category>
         <category headerText="Detalle Transaccion Licencia" id="c2" flow="NewRow">
           <dataFields>
-            <dataField fieldName="Transaccion_Construccion" columns="15" />
+            <dataField fieldName="Transacciones" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -20,8 +20,8 @@
     <field name="Licencias_Construccion" type="DataView" label="Licencias Construccion">
       <dataView controller="Licencias_Construccion" view="grid1" />
     </field>
-    <field name="Transaccion_Construccion" type="DataView" label="Transaccion Construccion">
-      <dataView controller="Transaccion_Construccion" view="grid1" filterSource="Licencias_Construccion" filterFields="IDLicencia" />
+    <field name="Transacciones" type="DataView" label="Transacciones">
+      <dataView controller="Transacciones" view="grid1" filterSource="Licencias_Construccion" filterFields="IDLicencia" />
     </field>
   </fields>
 </dataController>

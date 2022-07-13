@@ -8,8 +8,8 @@
         public static void Initialize()
         {
             // register blob handlers
-            RegisterHandler("TRANSACCIONComprobante", "\"dbo\".\"TRANSACCION\"", "\"COMPROBANTE\"", new string[] {
-                        "\"ID_TRANSACCION\""}, "Transaccion Comprobante", "Transaccion", "Comprobante");
+            RegisterHandler("TRANSACCIONESComprobante", "\"dbo\".\"TRANSACCIONES\"", "\"COMPROBANTE\"", new string[] {
+                        "\"ID_TRANSACCION\""}, "Transacciones Comprobante", "Transacciones", "Comprobante");
         }
     }
 }

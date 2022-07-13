@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Transaccion_Construccion" label="Transaccion_Construccion" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Transaccion_general" label="Transaccion_general" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" custom="false">
       <text><![CDATA[select
@@ -22,6 +22,9 @@
 	,"TRANSACCION"."FECHA_ACTUALIZA" "FechaActualiza"
 	,"TRANSACCION"."ID_ESTADO" "IDEstado"
 	,"ESTADOS"."ESTADO" "EstadosEstado"
+	,"TRANSACCION"."ID_COMPANIA" "IDCompania"
+	,"TRANSACCION"."ID_COLABORADOR_ENTREGA" "IDColaboradorEntrega"
+	,"TRANSACCION"."FECHA_ENTREGA" "FechaEntrega"
 from "dbo"."TRANSACCION" "TRANSACCION"
 	left join "dbo"."LICENCIAS" "TheID_LICENCIA" on "TRANSACCION"."ID_LICENCIA" = "TheID_LICENCIA"."ID_LICENCIA"
 	left join "dbo"."PROVEEDORR" "TheID_LICENCIAID_PROVEEDOR" on "TheID_LICENCIA"."ID_PROVEEDOR" = "TheID_LICENCIAID_PROVEEDOR"."ID_PROVEEDOR"
@@ -65,6 +68,13 @@ from "dbo"."TRANSACCION" "TRANSACCION"
       <items style="DropDownList" dataController="Estados" newDataView="createForm1" dataValueField="IDEstado" dataTextField="Estado" dataView="grid1" />
     </field>
     <field name="EstadosEstado" type="String" readOnly="true" label="Estado" length="50" />
+    <field name="IDCompania" type="Int32" label="Reembolso a ">
+      <items dataView="grid1" style="DropDownList" dataController="compania" dataTextField="DESCRIPCION" dataValueField="ID_COMPANIA" />
+    </field>
+    <field name="IDColaboradorEntrega" type="Int32" label="Entrega a">
+      <items style="DropDownList" dataController="EMPLEADOS_SISTEMA" dataView="grid1" dataTextField="NOMBRE" dataValueField="ID_USUARIO" />
+    </field>
+    <field name="FechaEntrega" type="DateTime" label="Fecha Entrega" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Transaccion">
@@ -80,6 +90,8 @@ from "dbo"."TRANSACCION" "TRANSACCION"
         <dataField fieldName="Comprobante" columns="15">
           <headerText>Adjunto</headerText>
         </dataField>
+        <dataField fieldName="IDColaboradorEntrega" columns="15" />
+        <dataField fieldName="FechaEntrega" columns="10" />
         <dataField fieldName="UsuarioCrea" columns="20" />
         <dataField fieldName="FechaCrea" columns="20" />
         <dataField fieldName="UsuarioActualiza" columns="20" />
@@ -108,7 +120,25 @@ from "dbo"."TRANSACCION" "TRANSACCION"
             </dataField>
           </dataFields>
         </category>
-        <category headerText="ESPECIFICACIONES" id="c3" wrap="true" floating="true" flow="NewColumn" />
+        <category headerText="ESPECIFICACIONES" id="c3" wrap="true" floating="true" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="IDCompania" columns="15">
+              <visibility>
+                <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="IDColaboradorEntrega" columns="15">
+              <visibility>
+                <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="FechaEntrega" columns="10">
+              <visibility>
+                <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+              </visibility>
+            </dataField>
+          </dataFields>
+        </category>
         <category headerText="BITACORA" id="c2" wrap="true" floating="true">
           <dataFields>
             <dataField fieldName="UsuarioCrea" columns="20" />
@@ -141,7 +171,25 @@ from "dbo"."TRANSACCION" "TRANSACCION"
             </dataField>
           </dataFields>
         </category>
-        <category headerText="ESPECIFICACIONES" id="c3" wrap="true" floating="true" flow="NewColumn" />
+        <category headerText="ESPECIFICACIONES" id="c3" wrap="true" floating="true" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="IDCompania" columns="15">
+              <visibility>
+                <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="IDColaboradorEntrega" columns="15">
+              <visibility>
+                <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="FechaEntrega" columns="10">
+              <visibility>
+                <expression test="[IDTipoTransaccion]==2" type="ClientScript" />
+              </visibility>
+            </dataField>
+          </dataFields>
+        </category>
         <category headerText="BITACORA" id="c2" wrap="true" floating="true">
           <dataFields>
             <dataField fieldName="UsuarioCrea" columns="20" />

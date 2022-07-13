@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Licencias_Construccion" label="Licencias_Construccion" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Licencias_General" label="Licencias_General" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" custom="false">
       <text><![CDATA[select
@@ -71,7 +71,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Licencias" filter="IDTipoLicencia=1">
+    <view id="grid1" type="Grid" commandId="command1" label="Licencias" filter="IDTipoLicencia&lt;&gt;1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="NoLicencia" columns="50" />
@@ -82,9 +82,6 @@ from "dbo"."LICENCIAS" "LICENCIAS"
         <dataField fieldName="FechaVencimiento" columns="20" />
         <dataField fieldName="DiasFaltantes" columns="15" />
         <dataField fieldName="DescriptorLicencia" />
-        <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
-        <dataField fieldName="PermisoOcupacion" columns="50" />
-        <dataField fieldName="UbicacionesDescripcion" columns="50" />
         <dataField fieldName="UsuarioCrea" columns="20" />
         <dataField fieldName="FechaCrea" columns="20" />
         <dataField fieldName="UsuarioActualiza" columns="20" />
@@ -108,18 +105,11 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
             <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
-          </dataFields>
-        </category>
-        <category headerText="ESPECIFICACIONES" id="c3" flow="NewColumn">
-          <dataFields>
-            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
-            <dataField fieldName="PermisoOcupacion" columns="50" />
-            <dataField fieldName="IDUbicacion" columns="15" />
-            <dataField fieldName="DescriptorLicencia" />
             <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+            <dataField fieldName="DescriptorLicencia" />
           </dataFields>
         </category>
-        <category id="c2" headerText="BITACORA" flow="NewRow">
+        <category id="c2" headerText="BITACORA" flow="NewColumn">
           <dataFields>
             <dataField fieldName="UsuarioCrea" columns="20" />
             <dataField fieldName="FechaCrea" columns="20" />
@@ -140,18 +130,11 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
             <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
-          </dataFields>
-        </category>
-        <category headerText="ESPECIFICACIONES" id="c3" flow="NewColumn">
-          <dataFields>
-            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
-            <dataField fieldName="PermisoOcupacion" columns="50" />
-            <dataField fieldName="IDUbicacion" columns="15" />
-            <dataField fieldName="DescriptorLicencia" />
             <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
+            <dataField fieldName="DescriptorLicencia" />
           </dataFields>
         </category>
-        <category id="c2" headerText="BITACORA" flow="NewRow">
+        <category id="c2" headerText="BITACORA" flow="NewColumn">
           <dataFields>
             <dataField fieldName="UsuarioCrea" columns="20" />
             <dataField fieldName="FechaCrea" columns="20" />
@@ -224,9 +207,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IDEstado= 3
 SET @TheidEstadoestado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)
-
-SET @IDTipoLicencia = 1
-set @TipoLicenciaDescripcion = (SELECT DESCRIPCION FROM TIPO_LICENCIA WHERE ID_TIPO_LICENCIA = @IDTipoLicencia)]]></rule>
+]]></rule>
     <rule id="r101" commandName="Select" type="Sql" phase="Execute" name="Calculate DiasxVencer" view="grid1"><![CDATA[SET @DiasFaltantes = (DATEDIFF(day, getdate(), @FechaVencimiento))
 
 

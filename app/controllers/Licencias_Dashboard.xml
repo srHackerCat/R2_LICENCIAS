@@ -5,23 +5,23 @@
       <categories>
         <category headerText="Licencias" id="c1" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Licencias_IT" columns="15" />
+            <dataField fieldName="Licencias_general" columns="15" />
           </dataFields>
         </category>
         <category headerText="Detalle Transaccion Licencia" id="c2" flow="NewRow">
           <dataFields>
-            <dataField fieldName="Transaccion" columns="15" />
+            <dataField fieldName="Transaccion_general" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
   </views>
   <fields>
-    <field name="Licencias_IT" type="DataView" label="Licencias IT">
-      <dataView controller="Licencias_IT" view="grid1" />
+    <field name="Licencias_general" type="DataView" label="Licencias general">
+      <dataView controller="Licencias_general" view="grid1" />
     </field>
-    <field name="Transaccion" type="DataView" label="Transaccion">
-      <dataView controller="Transaccion" view="grid1" filterSource="Licencias_IT" filterFields="IDLicencia" />
+    <field name="Transaccion_general" type="DataView" label="Transaccion general">
+      <dataView controller="Transaccion_general" view="grid1" filterSource="Licencias_general" filterFields="IDLicencia" />
     </field>
   </fields>
 </dataController>

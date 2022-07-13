@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TRANSACCIONES" alias="TRANSACCIONES" created="2022-07-13T12:36:19" modified="2022-07-13T13:28:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TheID_LICENCIA" parentTableSchema="dbo" parentTableName="LICENCIAS" x="391" y="20">
+      <foreignKeyColumn columnName="ID_LICENCIA" parentColumnName="ID_LICENCIA" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_ESTADO" parentTableSchema="dbo" parentTableName="ESTADOS" baseForeignKey="TheID_LICENCIA" x="734" y="20">
+      <foreignKeyColumn columnName="ID_ESTADO" parentColumnName="ID_ESTADO" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_OCUPACION" parentTableSchema="dbo" parentTableName="PERMISO_OCUPACION" baseForeignKey="TheID_LICENCIA" x="734" y="197">
+      <foreignKeyColumn columnName="ID_OCUPACION" parentColumnName="ID_OCUPACION" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_PROVEEDOR" parentTableSchema="dbo" parentTableName="PROVEEDORR" baseForeignKey="TheID_LICENCIA" x="734" y="374">
+      <foreignKeyColumn columnName="ID_PROVEEDOR" parentColumnName="ID_PROVEEDOR" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_TIPO_LICENCIA" parentTableSchema="dbo" parentTableName="TIPO_LICENCIA" baseForeignKey="TheID_LICENCIA" x="734" y="535">
+      <foreignKeyColumn columnName="ID_TIPO_LICENCIA" parentColumnName="ID_TIPO_LICENCIA" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_UBICACION" parentTableSchema="dbo" parentTableName="Ubicaciones" baseForeignKey="TheID_LICENCIA" x="734" y="712">
+      <foreignKeyColumn columnName="ID_UBICACION" parentColumnName="ID_UBICACION" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_UBICACIONID_PROYECTO" parentTableSchema="dbo" parentTableName="PROYECTO" baseForeignKey="TheID_LICENCIAID_UBICACION" x="1075" y="20">
+      <foreignKeyColumn columnName="ID_PROYECTO" parentColumnName="ID_PROYECTO" />
+    </foreignKey>
+    <foreignKey id="TheID_TIPO_TRANSACCION" parentTableSchema="dbo" parentTableName="TIPO_TRANSACCION" x="391" y="296">
+      <foreignKeyColumn columnName="ID_TIPO_TRANSACCION" parentColumnName="ID_TIPO_TRANSACCION" />
+    </foreignKey>
+    <foreignKey id="TheID_TIPO_PAGO" parentTableSchema="dbo" parentTableName="TIPO_PAGO" x="391" y="457">
+      <foreignKeyColumn columnName="ID_TIPO_PAGO" parentColumnName="ID_TIPO_PAGO" />
+    </foreignKey>
+    <foreignKey id="TheID_ESTADO" parentTableSchema="dbo" parentTableName="ESTADOS" x="391" y="618">
+      <foreignKeyColumn columnName="ID_ESTADO" parentColumnName="ID_ESTADO" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ID_TRANSACCION" fieldName="IDTransaccion" label="Id Transaccion" />
+    <column name="ID_LICENCIA" fieldName="IDLicencia" label="Id Licencia" aliasColumnName="NO_LICENCIA" aliasForeignKey="TheID_LICENCIA" />
+    <column name="NO_LICENCIA" fieldName="TheidLicencianoLicencia" label="IDLICENCIA No Licencia" foreignKey="TheID_LICENCIA" />
+    <column name="ESTADO" fieldName="TheidLicenciaidEstadoestado" label="IDLICENCIAIDESTADO Estado" foreignKey="TheID_LICENCIAID_ESTADO" />
+    <column name="OCUPACION" fieldName="TheidLicenciaidOcupacionocupacion" label="IDLICENCIAIDOCUPACION Ocupacion" foreignKey="TheID_LICENCIAID_OCUPACION" />
+    <column name="NOMBRE_COMERCIAL" fieldName="TheidLicenciaidProveedornombreComercial" label="IDLICENCIAIDPROVEEDOR Nombre Comercial" foreignKey="TheID_LICENCIAID_PROVEEDOR" />
+    <column name="DESCRIPCION" fieldName="TheidLicenciaidTipoLicenciadescripcion" label="IDLICENCIAIDTIPOLICENCIA Descripcion" foreignKey="TheID_LICENCIAID_TIPO_LICENCIA" />
+    <column name="DESCRIPCION" fieldName="TheidLicenciaidUbicaciondescripcion" label="IDLICENCIAIDUBICACION Descripcion" foreignKey="TheID_LICENCIAID_UBICACION" />
+    <column name="NOMBRE_PROYECTO" fieldName="TheidLicenciaidUbicacionidProyectonombreProyecto" label="IDLICENCIAIDUBICACIONIDPROYECTO Nombre Proyecto" foreignKey="TheID_LICENCIAID_UBICACIONID_PROYECTO" />
+    <column name="ID_TIPO_TRANSACCION" fieldName="IDTipoTransaccion" label="Id Tipo Transaccion" aliasColumnName="DESCRIPCION" aliasForeignKey="TheID_TIPO_TRANSACCION" />
+    <column name="DESCRIPCION" fieldName="TheidTipoTransacciondescripcion" label="IDTIPOTRANSACCION Descripcion" foreignKey="TheID_TIPO_TRANSACCION" />
+    <column name="ID_TIPO_PAGO" fieldName="IDTipoPago" label="Id Tipo Pago" aliasColumnName="DESCRIPCION" aliasForeignKey="TheID_TIPO_PAGO" />
+    <column name="DESCRIPCION" fieldName="TheidTipoPagodescripcion" label="IDTIPOPAGO Descripcion" foreignKey="TheID_TIPO_PAGO" />
+    <column name="ID_ESTADO" fieldName="IDEstado" label="Id Estado" aliasColumnName="ESTADO" aliasForeignKey="TheID_ESTADO" />
+    <column name="ESTADO" fieldName="TheidEstadoestado" label="IDESTADO Estado" foreignKey="TheID_ESTADO" />
+    <column name="MONTO_ML" fieldName="MontoMl" label="Monto Ml" />
+    <column name="FECHA_TRANSACCION" fieldName="FechaTransaccion" label="Fecha Transaccion" />
+    <column name="NO_DOCUMENTO" fieldName="NoDocumento" label="No Documento" />
+    <column name="COMPROBANTE" fieldName="Comprobante" label="Comprobante" />
+    <column name="ID_COLABORADOR_ENTREGA" fieldName="IDColaboradorEntrega" label="Id Colaborador Entrega" />
+    <column name="FECHA_ENTREGA" fieldName="FechaEntrega" label="Fecha Entrega" />
+    <column name="ID_COMPANIA" fieldName="IDCompania" label="Id Compania" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+  </columns>
+</dataModel>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Licencias_Dashboard_General" label="Licencias_Dashboard_General" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <views>
+    <view id="Form1" type="Form" label="Licencias">
+      <categories>
+        <category headerText="Licencias" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Licencias_General" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Detalle Transaccion Licencia" id="c2" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="Transacciones_General" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <fields>
+    <field name="Licencias_General" type="DataView" label="Licencias General">
+      <dataView controller="Licencias_General" view="grid1" />
+    </field>
+    <field name="Transacciones_General" type="DataView" label="Transacciones General">
+      <dataView controller="Transacciones_General" view="grid1" filterSource="Licencias_General" filterFields="IDLicencia" />
+    </field>
+  </fields>
+</dataController>
