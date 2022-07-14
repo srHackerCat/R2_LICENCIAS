@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="aspnet_Membership" conflictDetection="overwriteChanges" label="User Membership" handler="MyCompany.Security.MembershipBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="aspnet_Membership" conflictDetection="overwriteChanges" label="User Membership" connectionStringName="LocalSqlServer" handler="MyCompany.Security.MembershipBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <!-- 
 			Fields "Roles", "RoleId", "ConfirmPassword", and "OldPassword" are provided as 

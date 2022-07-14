@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="aspnet_Roles" conflictDetection="overwriteChanges" label="Roles" handler="MyCompany.Security.MembershipBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="aspnet_Roles" conflictDetection="overwriteChanges" label="Roles" connectionStringName="LocalSqlServer" handler="MyCompany.Security.MembershipBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
