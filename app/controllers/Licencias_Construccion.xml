@@ -12,7 +12,6 @@
 	,"LICENCIAS"."ID_ESTADO" "IDEstado"
 	,"TheID_ESTADO"."ESTADO" "TheidEstadoestado"
 	,"LICENCIAS"."FECHA_VENCIMIENTO" "FechaVencimiento"
-	,"LICENCIAS"."DESCRIPTOR_LICENCIA" "DescriptorLicencia"
 	,"LICENCIAS"."USUARIO_CREA" "UsuarioCrea"
 	,"LICENCIAS"."FECHA_CREA" "FechaCrea"
 	,"LICENCIAS"."USUARIO_ACTUALIZA" "UsuarioActualiza"
@@ -20,14 +19,13 @@
 	,"LICENCIAS"."FECHA_VIGENCIA" "FechaVigencia"
 	,"LICENCIAS"."ID_UBICACION" "IDUbicacion"
 	,"Ubicaciones"."DESCRIPCION" "UbicacionesDescripcion"
-	,"LICENCIAS"."ID_OCUPACION" "IDOcupacion"
-	,"PERMISO_OCUPACION"."OCUPACION" "PermisoOcupacion"
+	,"LICENCIAS"."FECHA_DEVOLUCION" "FechaDevolucion"
+	,"LICENCIAS"."MOTIVO_DEVOLUCION" "MotivoDevolucion"
 from "dbo"."LICENCIAS" "LICENCIAS"
 	left join "dbo"."ESTADOS" "TheID_ESTADO" on "LICENCIAS"."ID_ESTADO" = "TheID_ESTADO"."ID_ESTADO"
 	left join "dbo"."TIPO_LICENCIA" "TIPO_LICENCIA" on "LICENCIAS"."ID_TIPO_LICENCIA" = "TIPO_LICENCIA"."ID_TIPO_LICENCIA"
 	left join "dbo"."PROVEEDORR" "PROVEEDORR" on "LICENCIAS"."ID_PROVEEDOR" = "PROVEEDORR"."ID_PROVEEDOR"
-	left join "dbo"."Ubicaciones" "Ubicaciones" on "LICENCIAS"."ID_UBICACION" = "Ubicaciones"."ID_UBICACION"
-	left join "dbo"."PERMISO_OCUPACION" "PERMISO_OCUPACION" on "LICENCIAS"."ID_OCUPACION" = "PERMISO_OCUPACION"."ID_OCUPACION"]]></text>
+	left join "dbo"."Ubicaciones" "Ubicaciones" on "LICENCIAS"."ID_UBICACION" = "Ubicaciones"."ID_UBICACION"]]></text>
     </command>
     <command id="ID_LICENCIAIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
@@ -40,38 +38,34 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     <field name="IDLicencia" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Licencia" readOnly="true" causesCalculate="true" />
     <field name="NoLicencia" type="String" allowNulls="false" label="No Licencia" length="50" showInSummary="true" />
     <field name="IDTipoLicencia" type="Int32" allowNulls="false" label="Id Tipo Licencia" showInSummary="true">
-      <items style="Lookup" dataController="TipoLicencia" newDataView="createForm1" dataValueField="IDTipoLicencia" dataTextField="Descripcion" />
+      <items style="DropDownList" dataController="TipoLicencia" newDataView="createForm1" dataValueField="IDTipoLicencia" dataTextField="Descripcion" />
     </field>
     <field name="TipoLicenciaDescripcion" type="String" readOnly="true" label="Tipo Licencia" length="30" />
     <field name="IDProveedor" type="Int32" allowNulls="false" label="Id Proveedor" showInSummary="true">
       <items style="Lookup" dataController="Proveedorr" newDataView="createForm1" dataValueField="IDProveedor" dataTextField="NombreComercial" />
     </field>
     <field name="ProveedorrNombreComercial" type="String" readOnly="true" label="Proveedor" length="300" />
-    <field name="IDEstado" type="Int32" allowNulls="false" label="Id Estado" showInSummary="true" contextFields="Estado='ACTIVA', Estado='COMPLETA'">
+    <field name="IDEstado" type="Int32" allowNulls="false" label="Id Estado" showInSummary="true" contextFields="Estado='ACTIVA', Estado='COMPLETA', Estado='PAUSADA'">
       <items style="DropDownList" dataController="Estados" dataValueField="IDEstado" dataTextField="Estado" />
     </field>
     <field name="TheidEstadoestado" type="String" readOnly="true" label="Estado" length="50" />
     <field name="FechaVigencia" type="Date" allowNulls="false" dataFormatString="g" label="Fecha Vigencia" />
     <field name="FechaVencimiento" type="Date" allowNulls="false" dataFormatString="g" label="Fecha Vencimiento" showInSummary="true" causesCalculate="true" />
-    <field name="DescriptorLicencia" type="String" label="Descriptor Licencia" length="150" />
-    <field name="IDUbicacion" type="Int32" label="Ubicacion">
-      <items style="Lookup" dataController="Ubicaciones" newDataView="createForm1" dataValueField="IDUbicacion" dataTextField="Descripcion" />
-    </field>
-    <field name="UbicacionesDescripcion" type="String" readOnly="true" label="Ubicacion" length="50" />
-    <field name="IDOcupacion" type="Int32" label="ID Ocupacion">
-      <items style="Lookup" dataController="PermisoOcupacion" newDataView="createForm1" dataValueField="IDOcupacion" dataTextField="Ocupacion" />
-    </field>
-    <field name="PermisoOcupacion" type="String" readOnly="true" label="Permiso Ocupacion" length="50" />
-    <field name="DiasFaltantes" type="Int32" label="Dias Faltantes" calculated="true" causesCalculate="true" isVirtual="true">
-      <formula />
-    </field>
     <field name="UsuarioCrea" type="String" label="Usuario Crea" length="20" />
     <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
     <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" />
     <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+    <field name="IDUbicacion" type="Int32" label="Ubicacion">
+      <items style="Lookup" dataController="Ubicaciones" newDataView="createForm1" dataValueField="IDUbicacion" dataTextField="Descripcion" />
+    </field>
+    <field name="UbicacionesDescripcion" type="String" readOnly="true" label="Ubicacion" length="50" />
+    <field name="MotivoDevolucion" type="String" label="Motivo Devolucion" length="350" />
+    <field name="DiasFaltantes" type="Int32" label="Dias Faltantes" calculated="true" causesCalculate="true" isVirtual="true">
+      <formula />
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Licencias" filter="IDTipoLicencia=1">
+    <view id="grid1" type="Grid" commandId="command1" label="Licencias">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="NoLicencia" columns="50" />
@@ -81,9 +75,6 @@ from "dbo"."LICENCIAS" "LICENCIAS"
         <dataField fieldName="FechaVigencia" columns="20" />
         <dataField fieldName="FechaVencimiento" columns="20" />
         <dataField fieldName="DiasFaltantes" columns="15" />
-        <dataField fieldName="DescriptorLicencia" />
-        <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
-        <dataField fieldName="PermisoOcupacion" columns="50" />
         <dataField fieldName="UbicacionesDescripcion" columns="50" />
         <dataField fieldName="UsuarioCrea" columns="20" />
         <dataField fieldName="FechaCrea" columns="20" />
@@ -95,6 +86,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
         <expression type="ClientScript" result="NARANJA1" test="[DiasFaltantes]&gt;=25 &amp;&amp; [DiasFaltantes]&lt;=44" />
         <expression type="ClientScript" result="ROJO1" test="[DiasFaltantes]&lt;=24" />
         <expression type="ClientScript" result="VERDE" test="[IDEstado]==4" />
+        <expression type="ClientScript" result="PAUSADA" test="[IDEstado]==7" />
       </styles>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Licencias">
@@ -108,16 +100,16 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
             <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
+            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
           </dataFields>
         </category>
         <category headerText="ESPECIFICACIONES" id="c3" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
-            <dataField fieldName="PermisoOcupacion" columns="50" />
             <dataField fieldName="IDUbicacion" columns="15" />
-            <dataField fieldName="DescriptorLicencia" />
-            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
           </dataFields>
+          <visibility>
+            <expression test="[IDTipoLicencia]!==2" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c2" headerText="BITACORA" flow="NewRow">
           <dataFields>
@@ -133,23 +125,23 @@ from "dbo"."LICENCIAS" "LICENCIAS"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="DATOS GENERALES" flow="NewColumn">
-          <description><![CDATA[Llene el formato a continuación. Asegúrese de ingresar todos los campos obligatorios.]]></description>
+          <description />
           <dataFields>
             <dataField fieldName="NoLicencia" columns="50" />
             <dataField fieldName="IDTipoLicencia" aliasFieldName="TipoLicenciaDescripcion" />
             <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
             <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
+            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
           </dataFields>
         </category>
         <category headerText="ESPECIFICACIONES" id="c3" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacion" />
-            <dataField fieldName="PermisoOcupacion" columns="50" />
             <dataField fieldName="IDUbicacion" columns="15" />
-            <dataField fieldName="DescriptorLicencia" />
-            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
           </dataFields>
+          <visibility>
+            <expression test="[IDTipoLicencia]!==2" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c2" headerText="BITACORA" flow="NewRow">
           <dataFields>
@@ -194,7 +186,10 @@ from "dbo"."LICENCIAS" "LICENCIAS"
       <action commandName="SQL" headerText="MARCAR COMPLETADA" cssClass="material-icon-check_circle" whenKeySelected="true" id="a100">
         <data><![CDATA[UPDATE LICENCIAS SET ID_ESTADO = 4 WHERE ID_LICENCIA = @IDLicencia]]></data>
       </action>
-      <action commandName="SQL" headerText="ENVIAR ALERTA" cssClass="material-icon-send" whenKeySelected="true" id="a101">
+      <action commandName="SQL" headerText="PAUSAR LICENCIA" cssClass="material-icon-block" whenKeySelected="true" id="a102" confirmation="_controller=ParametrosPausaLicencia &#xD;&#xA;_title=LA LICENCIA SE PAUSA POR DEVOLUCION, INDIQUE EL MOTIVO&#xD;&#xA;_width=250">
+        <data><![CDATA[EXEC [dbo].[PAUSAR_LICENCIAS]@IDLicencia, @parameters_MOTIVO_DEVOLUCION]]></data>
+      </action>
+      <action commandName="SQL" headerText="ENVIAR ALERTA" cssClass="material-icon-send" whenKeySelected="true" id="a101" notify="ALERTA ENVIADA">
         <data><![CDATA[EXEC [dbo].[ENVIO_CORREO_ALERTA_VENCIMIENTO]@IDLicencia]]></data>
       </action>
     </actionGroup>
@@ -231,8 +226,8 @@ from "dbo"."LICENCIAS" "LICENCIAS"
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IDEstado= 3
 SET @TheidEstadoestado = (SELECT ESTADO FROM ESTADOS WHERE ID_ESTADO =@IDEstado)
 
-SET @IDTipoLicencia = 1
-set @TipoLicenciaDescripcion = (SELECT DESCRIPCION FROM TIPO_LICENCIA WHERE ID_TIPO_LICENCIA = @IDTipoLicencia)]]></rule>
+SET @IDTipoLicencia=1
+set @TipoLicenciaDescripcion= (SELECT DESCRIPCION FROM TIPO_LICENCIA WHERE ID_TIPO_LICENCIA =@IDTipoLicencia)]]></rule>
     <rule id="r101" commandName="Select" type="Sql" phase="Execute" name="Calculate DiasxVencer" view="grid1"><![CDATA[SET @DiasFaltantes = (DATEDIFF(day, getdate(), @FechaVencimiento))
 
 

@@ -1,64 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Ubicaciones" conflictDetection="overwriteChanges" label="Ubicaciones" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ClasificacionEstados" conflictDetection="overwriteChanges" label="Clasificacion Estados" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
 select
-	"Ubicaciones"."ID_UBICACION" "IDUbicacion"
-	,"Ubicaciones"."ID_PROYECTO" "IDProyecto"
-	,"TheID_PROYECTO"."NOMBRE_PROYECTO" "TheidProyectonombreProyecto"
-	,"Ubicaciones"."DESCRIPCION" "Descripcion"
-	,"Ubicaciones"."USUARIO_CREA" "UsuarioCrea"
-	,"Ubicaciones"."FECHA_CREA" "FechaCrea"
-	,"Ubicaciones"."USUARIO_ACTUALIZA" "UsuarioActualiza"
-	,"Ubicaciones"."FECHA_ACTUALIZA" "FechaActualiza"
-from "dbo"."Ubicaciones" "Ubicaciones"
-	left join "dbo"."PROYECTO" "TheID_PROYECTO" on "Ubicaciones"."ID_PROYECTO" = "TheID_PROYECTO"."ID_PROYECTO"
+	"CLASIFICACION_ESTADOS"."ID_CLASIFICACION" "IDClasificacion"
+	,"CLASIFICACION_ESTADOS"."CLASIFICACION" "Clasificacion"
+	,"CLASIFICACION_ESTADOS"."USUARIO_CREA" "UsuarioCrea"
+	,"CLASIFICACION_ESTADOS"."FECHA_CREA" "FechaCrea"
+	,"CLASIFICACION_ESTADOS"."USUARIO_ACTUALIZA" "UsuarioActualiza"
+	,"CLASIFICACION_ESTADOS"."FECHA_ACTUALIZA" "FechaActualiza"
+from "dbo"."CLASIFICACION_ESTADOS" "CLASIFICACION_ESTADOS"
 ]]></text>
     </command>
-    <command id="ID_UBICACIONIdentityCommand" type="Text" event="Inserted">
+    <command id="ID_CLASIFICACIONIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
       <output>
-        <fieldOutput fieldName="IDUbicacion" />
+        <fieldOutput fieldName="IDClasificacion" />
       </output>
     </command>
   </commands>
   <fields>
-    <field name="IDUbicacion" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Ubicacion" readOnly="true" />
-    <field name="IDProyecto" type="Int32" allowNulls="false" label="Id Proyecto" showInSummary="true">
-      <items style="Lookup" dataController="Proyecto" newDataView="createForm1" dataValueField="IDProyecto" dataTextField="NombreProyecto" />
-    </field>
-    <field name="TheidProyectonombreProyecto" type="String" readOnly="true" label="IDPROYECTO Nombre Proyecto" length="50" />
-    <field name="Descripcion" type="String" allowNulls="false" label="Descripcion" length="50" showInSummary="true" />
+    <field name="IDClasificacion" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Clasificacion" readOnly="true" />
+    <field name="Clasificacion" type="String" allowNulls="false" label="Clasificacion" length="50" showInSummary="true" />
     <field name="UsuarioCrea" type="String" label="Usuario Crea" length="20" showInSummary="true" />
     <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" showInSummary="true" />
     <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" showInSummary="true" />
-    <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+    <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Ubicaciones">
+    <view id="grid1" type="Grid" commandId="command1" label="Clasificacion Estados">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Descripcion" columns="50">
-          <headerText>Ubicacion</headerText>
-        </dataField>
-        <dataField fieldName="IDProyecto" aliasFieldName="TheidProyectonombreProyecto">
-          <headerText>Proyecto</headerText>
-        </dataField>
+        <dataField fieldName="Clasificacion" columns="50" />
         <dataField fieldName="UsuarioCrea" columns="20" />
         <dataField fieldName="FechaCrea" columns="20" />
         <dataField fieldName="UsuarioActualiza" columns="20" />
         <dataField fieldName="FechaActualiza" columns="20" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Ubicaciones">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Clasificacion Estados">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Ubicaciones" flow="NewColumn">
+        <category id="c1" headerText="Clasificacion Estados" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="IDProyecto" aliasFieldName="TheidProyectonombreProyecto" />
-            <dataField fieldName="Descripcion" columns="50" />
+            <dataField fieldName="Clasificacion" columns="50" />
             <dataField fieldName="UsuarioCrea" columns="20" />
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />
@@ -67,14 +54,13 @@ from "dbo"."Ubicaciones" "Ubicaciones"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Ubicaciones">
+    <view id="createForm1" type="Form" commandId="command1" label="New Clasificacion Estados">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="IDProyecto" aliasFieldName="TheidProyectonombreProyecto" />
-            <dataField fieldName="Descripcion" columns="50" />
+            <dataField fieldName="Clasificacion" columns="50" />
             <dataField fieldName="UsuarioCrea" columns="20" />
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />

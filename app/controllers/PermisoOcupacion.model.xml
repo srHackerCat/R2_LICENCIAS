@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="PERMISO_OCUPACION" alias="PERMISO_OCUPACION" created="2022-06-23T10:45:39" modified="2022-07-05T10:43:11" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="PERMISO_OCUPACION" alias="PERMISO_OCUPACION" created="2022-06-23T10:45:39" modified="2022-07-21T11:18:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="ID_OCUPACION" fieldName="IDOcupacion" label="Id Ocupacion" />
-    <column name="OCUPACION" fieldName="Ocupacion" label="Ocupacion" />
     <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
     <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
     <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
     <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
-    <column name="FECHA" fieldName="Fecha" label="Fecha" format="g" />
+    <column name="PERMISO_OCUPACION" fieldName="PermisoOcupacion" label="Permiso Ocupacion" />
+    <column name="FECHA_OTORGA_PERMISO" fieldName="FechaOtorgaPermiso" label="Fecha Otorga Permiso" format="g" />
   </columns>
 </dataModel>

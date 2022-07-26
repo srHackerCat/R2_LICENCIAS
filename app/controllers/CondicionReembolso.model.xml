@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="CONDICION_REEMBOLSO" alias="CONDICION_REEMBOLSO" created="2022-07-21T10:36:19" modified="2022-07-21T10:36:21" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TheID_LICENCIA" parentTableSchema="dbo" parentTableName="LICENCIAS" x="397" y="20">
+      <foreignKeyColumn columnName="ID_LICENCIA" parentColumnName="ID_LICENCIA" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_ESTADO" parentTableSchema="dbo" parentTableName="ESTADOS" baseForeignKey="TheID_LICENCIA" x="710" y="20">
+      <foreignKeyColumn columnName="ID_ESTADO" parentColumnName="ID_ESTADO" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_ESTADOID_CLASIFICACION" parentTableSchema="dbo" parentTableName="CLASIFICACION_ESTADOS" baseForeignKey="TheID_LICENCIAID_ESTADO" x="1051" y="20">
+      <foreignKeyColumn columnName="ID_CLASIFICACION" parentColumnName="ID_CLASIFICACION" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_PROVEEDOR" parentTableSchema="dbo" parentTableName="PROVEEDORR" baseForeignKey="TheID_LICENCIA" x="710" y="203">
+      <foreignKeyColumn columnName="ID_PROVEEDOR" parentColumnName="ID_PROVEEDOR" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_TIPO_LICENCIA" parentTableSchema="dbo" parentTableName="TIPO_LICENCIA" baseForeignKey="TheID_LICENCIA" x="710" y="365">
+      <foreignKeyColumn columnName="ID_TIPO_LICENCIA" parentColumnName="ID_TIPO_LICENCIA" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_UBICACION" parentTableSchema="dbo" parentTableName="Ubicaciones" baseForeignKey="TheID_LICENCIA" x="710" y="541">
+      <foreignKeyColumn columnName="ID_UBICACION" parentColumnName="ID_UBICACION" />
+    </foreignKey>
+    <foreignKey id="TheID_LICENCIAID_UBICACIONID_PROYECTO" parentTableSchema="dbo" parentTableName="PROYECTO" baseForeignKey="TheID_LICENCIAID_UBICACION" x="1365" y="20">
+      <foreignKeyColumn columnName="ID_PROYECTO" parentColumnName="ID_PROYECTO" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ID_CONDICION_REEMBOLSO" fieldName="IDCondicionReembolso" label="Id Condicion Reembolso" />
+    <column name="ID_LICENCIA" fieldName="IDLicencia" label="Id Licencia" aliasColumnName="NO_LICENCIA" aliasForeignKey="TheID_LICENCIA" />
+    <column name="NO_LICENCIA" fieldName="TheidLicencianoLicencia" label="IDLICENCIA No Licencia" foreignKey="TheID_LICENCIA" />
+    <column name="ESTADO" fieldName="TheidLicenciaidEstadoestado" label="IDLICENCIAIDESTADO Estado" foreignKey="TheID_LICENCIAID_ESTADO" />
+    <column name="CLASIFICACION" fieldName="TheidLicenciaidEstadoidClasificacionclasificacion" label="IDLICENCIAIDESTADOIDCLASIFICACION Clasificacion" foreignKey="TheID_LICENCIAID_ESTADOID_CLASIFICACION" />
+    <column name="NOMBRE_COMERCIAL" fieldName="TheidLicenciaidProveedornombreComercial" label="IDLICENCIAIDPROVEEDOR Nombre Comercial" foreignKey="TheID_LICENCIAID_PROVEEDOR" />
+    <column name="DESCRIPCION" fieldName="TheidLicenciaidTipoLicenciadescripcion" label="IDLICENCIAIDTIPOLICENCIA Descripcion" foreignKey="TheID_LICENCIAID_TIPO_LICENCIA" />
+    <column name="DESCRIPCION" fieldName="TheidLicenciaidUbicaciondescripcion" label="IDLICENCIAIDUBICACION Descripcion" foreignKey="TheID_LICENCIAID_UBICACION" />
+    <column name="NOMBRE_PROYECTO" fieldName="TheidLicenciaidUbicacionidProyectonombreProyecto" label="IDLICENCIAIDUBICACIONIDPROYECTO Nombre Proyecto" foreignKey="TheID_LICENCIAID_UBICACIONID_PROYECTO" />
+    <column name="CONDICION" fieldName="Condicion" label="Condicion" />
+    <column name="USUARIO_CREA" fieldName="UsuarioCrea" label="Usuario Crea" />
+    <column name="FECHA_CREA" fieldName="FechaCrea" label="Fecha Crea" format="g" />
+    <column name="USUARIO_ACTUALIZA" fieldName="UsuarioActualiza" label="Usuario Actualiza" />
+    <column name="FECHA_ACTUALIZA" fieldName="FechaActualiza" label="Fecha Actualiza" format="g" />
+  </columns>
+</dataModel>

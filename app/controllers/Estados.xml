@@ -10,8 +10,10 @@ select
 	,"ESTADOS"."FECHA_CREA" "FechaCrea"
 	,"ESTADOS"."USUARIO_ACTUALIZA" "UsuarioActualiza"
 	,"ESTADOS"."FECHA_ACTUALIZA" "FechaActualiza"
-	,"ESTADOS"."CLASIFICACION" "Clasificacion"
+	,"ESTADOS"."ID_CLASIFICACION" "IDClasificacion"
+	,"CLASIFICACION_ESTADOS"."CLASIFICACION" "ClasificacionEstadosClasificacion"
 from "dbo"."ESTADOS" "ESTADOS"
+	left join "dbo"."CLASIFICACION_ESTADOS" "CLASIFICACION_ESTADOS" on "ESTADOS"."ID_CLASIFICACION" = "CLASIFICACION_ESTADOS"."ID_CLASIFICACION"
 ]]></text>
     </command>
     <command id="ID_ESTADOIdentityCommand" type="Text" event="Inserted">
@@ -28,7 +30,10 @@ from "dbo"."ESTADOS" "ESTADOS"
     <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" showInSummary="true" />
     <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="20" showInSummary="true" />
     <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" showInSummary="true" />
-    <field name="Clasificacion" type="String" allowNulls="false" label="Clasificacion" length="50" />
+    <field name="IDClasificacion" type="Int32" label="ID Clasificacion">
+      <items style="Lookup" dataController="ClasificacionEstados" newDataView="createForm1" dataValueField="IDClasificacion" dataTextField="Clasificacion" />
+    </field>
+    <field name="ClasificacionEstadosClasificacion" type="String" readOnly="true" label="Clasificacion Estados Clasificacion" length="50" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Estados">
@@ -39,7 +44,7 @@ from "dbo"."ESTADOS" "ESTADOS"
         <dataField fieldName="FechaCrea" columns="20" />
         <dataField fieldName="UsuarioActualiza" columns="20" />
         <dataField fieldName="FechaActualiza" columns="20" />
-        <dataField fieldName="Clasificacion" columns="50" />
+        <dataField fieldName="IDClasificacion" aliasFieldName="ClasificacionEstadosClasificacion" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Estados">
@@ -53,7 +58,7 @@ from "dbo"."ESTADOS" "ESTADOS"
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />
             <dataField fieldName="FechaActualiza" columns="20" />
-            <dataField fieldName="Clasificacion" columns="50" />
+            <dataField fieldName="IDClasificacion" aliasFieldName="ClasificacionEstadosClasificacion" />
           </dataFields>
         </category>
       </categories>
@@ -69,7 +74,7 @@ from "dbo"."ESTADOS" "ESTADOS"
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />
             <dataField fieldName="FechaActualiza" columns="20" />
-            <dataField fieldName="Clasificacion" columns="50" />
+            <dataField fieldName="IDClasificacion" aliasFieldName="ClasificacionEstadosClasificacion" />
           </dataFields>
         </category>
       </categories>

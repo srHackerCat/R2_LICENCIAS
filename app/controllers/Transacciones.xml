@@ -7,13 +7,8 @@
 	,"TRANSACCIONES"."ID_LICENCIA" "IDLicencia"
 	,"TheID_LICENCIA"."NO_LICENCIA" "TheidLicencianoLicencia"
 	,"TheID_LICENCIAID_ESTADO"."ESTADO" "TheidLicenciaidEstadoestado"
-	,"TheID_LICENCIAID_OCUPACION"."OCUPACION" "TheidLicenciaidOcupacionocupacion"
-	,"TheID_LICENCIAID_PROVEEDOR"."NOMBRE_COMERCIAL" "TheidLicenciaidProveedornombreComercial"
-	,"TheID_LICENCIAID_TIPO_LICENCIA"."DESCRIPCION" "TheidLicenciaidTipoLicenciadescripcion"
-	,"TheID_LICENCIAID_UBICACION"."DESCRIPCION" "TheidLicenciaidUbicaciondescripcion"
-	,"TheID_LICENCIAID_UBICACIONID_PROYECTO"."NOMBRE_PROYECTO" "TheidLicenciaidUbicacionidProyectonombreProyecto"
 	,"TRANSACCIONES"."ID_TIPO_TRANSACCION" "IDTipoTransaccion"
-	,"TheID_TIPO_TRANSACCION"."DESCRIPCION" "TheidTipoTransacciondescripcion"
+	,"TIPO_TRANSACCION"."DESCRIPCION" "TipoTransaccionDescripcion"
 	,"TRANSACCIONES"."ID_TIPO_PAGO" "IDTipoPago"
 	,"TheID_TIPO_PAGO"."DESCRIPCION" "TheidTipoPagodescripcion"
 	,"TRANSACCIONES"."ID_ESTADO" "IDEstado"
@@ -29,17 +24,16 @@
 	,"TRANSACCIONES"."FECHA_CREA" "FechaCrea"
 	,"TRANSACCIONES"."USUARIO_ACTUALIZA" "UsuarioActualiza"
 	,"TRANSACCIONES"."FECHA_ACTUALIZA" "FechaActualiza"
+	,"TRANSACCIONES"."ID_OCUPACION" "IDOcupacion"
+	,"PERMISO_OCUPACION"."PERMISO_OCUPACION" "PermisoOcupacionPermisoOcupacion"
+	,"TRANSACCIONES"."OBSERVACION" "Observacion"
 from "dbo"."TRANSACCIONES" "TRANSACCIONES"
 	left join "dbo"."LICENCIAS" "TheID_LICENCIA" on "TRANSACCIONES"."ID_LICENCIA" = "TheID_LICENCIA"."ID_LICENCIA"
 	left join "dbo"."ESTADOS" "TheID_LICENCIAID_ESTADO" on "TheID_LICENCIA"."ID_ESTADO" = "TheID_LICENCIAID_ESTADO"."ID_ESTADO"
-	left join "dbo"."PERMISO_OCUPACION" "TheID_LICENCIAID_OCUPACION" on "TheID_LICENCIA"."ID_OCUPACION" = "TheID_LICENCIAID_OCUPACION"."ID_OCUPACION"
-	left join "dbo"."PROVEEDORR" "TheID_LICENCIAID_PROVEEDOR" on "TheID_LICENCIA"."ID_PROVEEDOR" = "TheID_LICENCIAID_PROVEEDOR"."ID_PROVEEDOR"
-	left join "dbo"."TIPO_LICENCIA" "TheID_LICENCIAID_TIPO_LICENCIA" on "TheID_LICENCIA"."ID_TIPO_LICENCIA" = "TheID_LICENCIAID_TIPO_LICENCIA"."ID_TIPO_LICENCIA"
-	left join "dbo"."Ubicaciones" "TheID_LICENCIAID_UBICACION" on "TheID_LICENCIA"."ID_UBICACION" = "TheID_LICENCIAID_UBICACION"."ID_UBICACION"
-	left join "dbo"."PROYECTO" "TheID_LICENCIAID_UBICACIONID_PROYECTO" on "TheID_LICENCIAID_UBICACION"."ID_PROYECTO" = "TheID_LICENCIAID_UBICACIONID_PROYECTO"."ID_PROYECTO"
-	left join "dbo"."TIPO_TRANSACCION" "TheID_TIPO_TRANSACCION" on "TRANSACCIONES"."ID_TIPO_TRANSACCION" = "TheID_TIPO_TRANSACCION"."ID_TIPO_TRANSACCION"
 	left join "dbo"."TIPO_PAGO" "TheID_TIPO_PAGO" on "TRANSACCIONES"."ID_TIPO_PAGO" = "TheID_TIPO_PAGO"."ID_TIPO_PAGO"
-	left join "dbo"."ESTADOS" "TheID_ESTADO" on "TRANSACCIONES"."ID_ESTADO" = "TheID_ESTADO"."ID_ESTADO"]]></text>
+	left join "dbo"."ESTADOS" "TheID_ESTADO" on "TRANSACCIONES"."ID_ESTADO" = "TheID_ESTADO"."ID_ESTADO"
+	left join "dbo"."PERMISO_OCUPACION" "PERMISO_OCUPACION" on "TRANSACCIONES"."ID_OCUPACION" = "PERMISO_OCUPACION"."ID_OCUPACION"
+	left join "dbo"."TIPO_TRANSACCION" "TIPO_TRANSACCION" on "TRANSACCIONES"."ID_TIPO_TRANSACCION" = "TIPO_TRANSACCION"."ID_TIPO_TRANSACCION"]]></text>
     </command>
     <command id="ID_TRANSACCIONIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
@@ -51,19 +45,14 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
   <fields>
     <field name="IDTransaccion" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id Transaccion" readOnly="true" />
     <field name="IDLicencia" type="Int32" allowNulls="false" label="Id Licencia" showInSummary="true">
-      <items copy="TheidLicenciaidEstadoestado=TheidEstadoestado, TheidLicenciaidOcupacionocupacion=PermisoOcupacion, TheidLicenciaidProveedornombreComercial=ProveedorrNombreComercial, TheidLicenciaidTipoLicenciadescripcion=TipoLicenciaDescripcion, TheidLicenciaidUbicaciondescripcion=UbicacionesDescripcion, " />
+      <items copy="TheidLicenciaidEstadoestado=TheidEstadoestado" />
     </field>
     <field name="TheidLicencianoLicencia" type="String" readOnly="true" label="IDLICENCIA No Licencia" length="50" />
     <field name="TheidLicenciaidEstadoestado" type="String" readOnly="true" label="IDLICENCIAIDESTADO Estado" length="50" />
-    <field name="TheidLicenciaidOcupacionocupacion" type="String" readOnly="true" label="IDLICENCIAIDOCUPACION Ocupacion" length="50" />
-    <field name="TheidLicenciaidProveedornombreComercial" type="String" readOnly="true" label="IDLICENCIAIDPROVEEDOR Nombre Comercial" length="300" />
-    <field name="TheidLicenciaidTipoLicenciadescripcion" type="String" readOnly="true" label="IDLICENCIAIDTIPOLICENCIA Descripcion" length="30" />
-    <field name="TheidLicenciaidUbicaciondescripcion" type="String" readOnly="true" label="IDLICENCIAIDUBICACION Descripcion" length="50" />
-    <field name="TheidLicenciaidUbicacionidProyectonombreProyecto" type="String" readOnly="true" label="IDLICENCIAIDUBICACIONIDPROYECTO Nombre Proyecto" length="50" />
     <field name="IDTipoTransaccion" type="Int32" allowNulls="false" label="Id Tipo Transaccion" showInSummary="true">
       <items style="RadioButtonList" dataController="TipoTransaccion" dataValueField="IDTipoTransaccion" dataTextField="Descripcion" />
     </field>
-    <field name="TheidTipoTransacciondescripcion" type="String" readOnly="true" label="Tipo Transaccion" length="50" />
+    <field name="TipoTransaccionDescripcion" type="String" readOnly="true" label="Tipo Transaccion Descripcion" length="50" />
     <field name="IDTipoPago" type="Int32" allowNulls="false" label="Id Tipo Pago" showInSummary="true">
       <items style="RadioButtonList" dataController="TipoPago" dataValueField="IDTipoPago" dataTextField="Descripcion" />
     </field>
@@ -72,7 +61,7 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
       <items style="DropDownList" dataController="Estados" dataValueField="IDEstado" dataTextField="Estado" />
     </field>
     <field name="TheidEstadoestado" type="String" readOnly="true" label="Estado" length="50" />
-    <field name="MontoMl" type="Decimal" allowNulls="false" label="Monto ML" showInSummary="true" />
+    <field name="MontoMl" type="Decimal" allowNulls="false" label="Monto" showInSummary="true" />
     <field name="FechaTransaccion" type="DateTime" allowNulls="false" label="Fecha Transaccion" />
     <field name="NoDocumento" type="String" allowNulls="false" label="No Documento" length="50" />
     <field name="Comprobante" type="Byte[]" onDemand="true" sourceFields="IDTransaccion" onDemandHandler="TRANSACCIONESComprobante" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Comprobante" />
@@ -87,6 +76,11 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
     <field name="FechaCrea" type="DateTime" dataFormatString="g" label="Fecha Crea" />
     <field name="UsuarioActualiza" type="String" label="Usuario Actualiza" length="50" />
     <field name="FechaActualiza" type="DateTime" dataFormatString="g" label="Fecha Actualiza" />
+    <field name="IDOcupacion" type="Int32" label="ID Ocupacion">
+      <items style="Lookup" dataController="PermisoOcupacion" dataValueField="IDOcupacion" dataTextField="PermisoOcupacion" newDataView="createForm1" />
+    </field>
+    <field name="PermisoOcupacionPermisoOcupacion" type="String" readOnly="true" label="Permiso Ocupacion Permiso Ocupacion" length="50" />
+    <field name="Observacion" type="String" label="Observacion" length="150" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Transacciones">
@@ -94,21 +88,13 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
       <dataFields>
         <dataField fieldName="IDLicencia" aliasFieldName="TheidLicencianoLicencia" />
         <dataField fieldName="TheidLicenciaidEstadoestado" columns="50" />
-        <dataField fieldName="TheidLicenciaidOcupacionocupacion" columns="50" />
-        <dataField fieldName="TheidLicenciaidProveedornombreComercial" />
-        <dataField fieldName="TheidLicenciaidTipoLicenciadescripcion" columns="30" />
-        <dataField fieldName="TheidLicenciaidUbicaciondescripcion" columns="50" />
-        <dataField fieldName="IDTipoTransaccion" aliasFieldName="TheidTipoTransacciondescripcion" />
+        <dataField fieldName="IDTipoTransaccion" aliasFieldName="TipoTransaccionDescripcion" />
         <dataField fieldName="IDTipoPago" aliasFieldName="TheidTipoPagodescripcion" />
         <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
         <dataField fieldName="MontoMl" columns="15" />
         <dataField fieldName="FechaTransaccion" columns="10" />
         <dataField fieldName="NoDocumento" columns="50" />
-        <dataField fieldName="TheidLicenciaidUbicacionidProyectonombreProyecto" columns="50" />
         <dataField fieldName="Comprobante" columns="15" />
-        <dataField fieldName="IDColaboradorEntrega" columns="15" />
-        <dataField fieldName="FechaEntrega" columns="10" />
-        <dataField fieldName="IDCompania" columns="15" />
         <dataField fieldName="UsuarioCrea" columns="50" />
         <dataField fieldName="FechaCrea" columns="20" />
         <dataField fieldName="UsuarioActualiza" columns="50" />
@@ -121,12 +107,13 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
         <category id="c1" headerText="DATOS GENERALES" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="IDTipoTransaccion" aliasFieldName="TheidTipoTransacciondescripcion" />
+            <dataField fieldName="IDTipoTransaccion" aliasFieldName="TipoTransaccionDescripcion" />
             <dataField fieldName="IDTipoPago" aliasFieldName="TheidTipoPagodescripcion" />
             <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
             <dataField fieldName="MontoMl" columns="15" />
             <dataField fieldName="FechaTransaccion" columns="10" />
             <dataField fieldName="NoDocumento" columns="50" />
+            <dataField fieldName="Observacion" />
             <dataField fieldName="IDLicencia" aliasFieldName="TheidLicencianoLicencia" />
           </dataFields>
         </category>
@@ -137,6 +124,7 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
         </category>
         <category headerText="ESPECIFICACIONES" id="c2">
           <dataFields>
+            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacionPermisoOcupacion" />
             <dataField fieldName="IDColaboradorEntrega" columns="15" />
             <dataField fieldName="FechaEntrega" columns="10" />
             <dataField fieldName="IDCompania" columns="15" />
@@ -161,7 +149,7 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
         <category id="c1" headerText="DATOS GENERALES" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="IDTipoTransaccion" aliasFieldName="TheidTipoTransacciondescripcion" />
+            <dataField fieldName="IDTipoTransaccion" aliasFieldName="TipoTransaccionDescripcion" />
             <dataField fieldName="IDTipoPago" aliasFieldName="TheidTipoPagodescripcion" />
             <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
             <dataField fieldName="MontoMl" columns="15" />
@@ -177,6 +165,8 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
         </category>
         <category headerText="ESPECIFICACIONES" id="c2">
           <dataFields>
+            <dataField fieldName="IDOcupacion" aliasFieldName="PermisoOcupacionPermisoOcupacion" />
+            <dataField fieldName="Observacion" />
             <dataField fieldName="IDColaboradorEntrega" columns="15" />
             <dataField fieldName="FechaEntrega" columns="10" />
             <dataField fieldName="IDCompania" columns="15" />

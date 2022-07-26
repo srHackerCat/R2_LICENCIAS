@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ParametrosPausaLicencia" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="MOTIVO_DEVOLUCION" type="String" label="MOTIVO DEVOLUCION" length="350" allowNulls="false" />
+  </fields>
+  <views />
+</dataController>

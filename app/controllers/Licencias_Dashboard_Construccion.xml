@@ -3,7 +3,7 @@
   <views>
     <view id="Form1" type="Form" label="Licencias">
       <categories>
-        <category headerText="Licencias de Construccion" id="c1" flow="NewColumn">
+        <category id="c1" flow="NewColumn">
           <dataFields>
             <dataField fieldName="Licencias_Construccion" columns="15" />
           </dataFields>
@@ -13,15 +13,23 @@
             <dataField fieldName="Transacciones" columns="15" />
           </dataFields>
         </category>
+        <category id="c3" headerText="Detalle Condiciones de Reembolso" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="CondicionReembolso" columns="15" />
+          </dataFields>
+        </category>
       </categories>
     </view>
   </views>
   <fields>
-    <field name="Licencias_Construccion" type="DataView" label="Licencias Construccion">
+    <field name="Licencias_Construccion" type="DataView" label="LICENCIAS GENERAL">
       <dataView controller="Licencias_Construccion" view="grid1" />
     </field>
     <field name="Transacciones" type="DataView" label="Transacciones">
       <dataView controller="Transacciones" view="grid1" filterSource="Licencias_Construccion" filterFields="IDLicencia" />
+    </field>
+    <field name="CondicionReembolso" type="DataView" label="Condicion Reembolso">
+      <dataView controller="CondicionReembolso" view="grid1" filterSource="Licencias_Construccion" filterFields="IDLicencia" />
     </field>
   </fields>
 </dataController>

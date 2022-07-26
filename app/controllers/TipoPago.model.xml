@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="TIPO_PAGO" alias="TIPO_PAGO" created="2022-06-27T11:35:53" modified="2022-06-27T12:52:16" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="TIPO_PAGO" alias="TIPO_PAGO" created="2022-06-27T11:35:53" modified="2022-07-21T08:42:51" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="ID_TIPO_PAGO" fieldName="IDTipoPago" label="Id Tipo Pago" />

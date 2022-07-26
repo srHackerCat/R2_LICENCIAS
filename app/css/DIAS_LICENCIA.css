@@ -17,3 +17,14 @@
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(126,217,87,1) 0%);
 }
+
+.PAUSADA {
+    background: rgba(236,243,248,1);
+    background: -moz-linear-gradient(left, rgba(236,243,248,1) 0%, rgba(151,185,211,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(236,243,248,1)), color-stop(100%, rgba(151,185,211,1)));
+    background: -webkit-linear-gradient(left, rgba(236,243,248,1) 0%, rgba(151,185,211,1) 100%);
+    background: -o-linear-gradient(left, rgba(236,243,248,1) 0%, rgba(151,185,211,1) 100%);
+    background: -ms-linear-gradient(left, rgba(236,243,248,1) 0%, rgba(151,185,211,1) 100%);
+    background: linear-gradient(to right, rgba(236,243,248,1) 0%, rgba(151,185,211,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecf3f8', endColorstr='#97b9d3', GradientType=1 );
+}
