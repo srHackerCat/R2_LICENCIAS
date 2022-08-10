@@ -45,7 +45,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
       <items style="Lookup" dataController="Proveedorr" newDataView="createForm1" dataValueField="IDProveedor" dataTextField="NombreComercial" />
     </field>
     <field name="ProveedorrNombreComercial" type="String" readOnly="true" label="Proveedor" length="300" />
-    <field name="IDEstado" type="Int32" allowNulls="false" label="Id Estado" showInSummary="true" contextFields="Estado='ACTIVA', Estado='COMPLETA', Estado='PAUSADA'" readOnly="true">
+    <field name="IDEstado" type="Int32" allowNulls="false" label="Id Estado" showInSummary="true" contextFields="Estado='ACTIVA', Estado='COMPLETA', Estado='PAUSADA'">
       <items style="DropDownList" dataController="Estados" dataValueField="IDEstado" dataTextField="Estado" />
     </field>
     <field name="TheidEstadoestado" type="String" readOnly="true" label="Estado" length="50" />

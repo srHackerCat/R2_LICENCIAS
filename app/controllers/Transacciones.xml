@@ -63,7 +63,7 @@ from "dbo"."TRANSACCIONES" "TRANSACCIONES"
     <field name="TheidEstadoestado" type="String" readOnly="true" label="Estado" length="50" />
     <field name="MontoMl" type="Decimal" allowNulls="false" label="Monto" showInSummary="true" />
     <field name="FechaTransaccion" type="DateTime" allowNulls="false" label="Fecha Transaccion" />
-    <field name="NoDocumento" type="String" allowNulls="false" label="No Documento" length="50" />
+    <field name="NoDocumento" type="String" label="No Documento" length="50" />
     <field name="Comprobante" type="Byte[]" onDemand="true" sourceFields="IDTransaccion" onDemandHandler="TRANSACCIONESComprobante" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Comprobante" />
     <field name="IDColaboradorEntrega" type="Int32" label="Entrega a">
       <items style="DropDownList" dataController="EMPLEADOS_SISTEMA" dataView="grid1" dataTextField="NOMBRE" dataValueField="ID_USUARIO" />
