@@ -5,8 +5,6 @@
     <siteMapNode title="CONFIGURACIONES" description="" url="~/pages/configuraciones" roles="*" cssClass="material-icon-perm_identity" />
     <siteMapNode title="PROVEEDORES" description="View Proveedorr" url="~/pages/proveedores" />
     <siteMapNode title="LICENCIAS" description="" url="~/pages/licenciass" roles="*" />
-    <siteMapNode title="REPORTERIA" description="" url="~/pages/modulo-reporteria" roles="*">
-      <siteMapNode title="REPORTE GENERAL" description="" url="~/pages/reporte_general" roles="*" />
-    </siteMapNode>
+    <siteMapNode title="REPORTERIA" description="" url="~/pages/modulo-reporteria" roles="*" />
   </siteMapNode>
 </siteMap>
