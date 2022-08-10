@@ -4,7 +4,7 @@
     <field name="idTIPO_LICENCIA" type="Int32" label="TIPO LICENCIA">
       <items style="DropDownList" dataController="TipoLicencia" dataView="grid1" dataTextField="Descripcion" dataValueField="IDTipoLicencia" />
     </field>
-    <field name="idEstado" type="Int32" label="ESTADO" isVirtual="true">
+    <field name="idEstado" type="Int32" label="ESTADO" isVirtual="true" contextFields="Estado='ACTIVA', Estado='COMPLETA', Estado='PAUSADA'">
       <items style="DropDownList" dataController="Estados" dataView="grid1" dataTextField="Estado" dataValueField="IDEstado" />
     </field>
   </fields>

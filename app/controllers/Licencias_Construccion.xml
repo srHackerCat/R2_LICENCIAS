@@ -45,7 +45,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
       <items style="Lookup" dataController="Proveedorr" newDataView="createForm1" dataValueField="IDProveedor" dataTextField="NombreComercial" />
     </field>
     <field name="ProveedorrNombreComercial" type="String" readOnly="true" label="Proveedor" length="300" />
-    <field name="IDEstado" type="Int32" allowNulls="false" label="Id Estado" showInSummary="true" contextFields="Estado='ACTIVA', Estado='COMPLETA', Estado='PAUSADA'">
+    <field name="IDEstado" type="Int32" allowNulls="false" label="Id Estado" showInSummary="true" contextFields="Estado='ACTIVA', Estado='COMPLETA', Estado='PAUSADA'" readOnly="true">
       <items style="DropDownList" dataController="Estados" dataValueField="IDEstado" dataTextField="Estado" />
     </field>
     <field name="TheidEstadoestado" type="String" readOnly="true" label="Estado" length="50" />
@@ -132,7 +132,6 @@ from "dbo"."LICENCIAS" "LICENCIAS"
             <dataField fieldName="IDProveedor" aliasFieldName="ProveedorrNombreComercial" />
             <dataField fieldName="FechaVigencia" columns="20" />
             <dataField fieldName="FechaVencimiento" columns="20" dataFormatString="g" />
-            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
           </dataFields>
         </category>
         <category headerText="ESPECIFICACIONES" id="c3" flow="NewColumn">
@@ -145,6 +144,7 @@ from "dbo"."LICENCIAS" "LICENCIAS"
         </category>
         <category id="c2" headerText="BITACORA" flow="NewRow">
           <dataFields>
+            <dataField fieldName="IDEstado" aliasFieldName="TheidEstadoestado" />
             <dataField fieldName="UsuarioCrea" columns="20" />
             <dataField fieldName="FechaCrea" columns="20" />
             <dataField fieldName="UsuarioActualiza" columns="20" />
